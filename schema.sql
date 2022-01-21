@@ -4,18 +4,21 @@ DROP DATABASE IF EXISTS sql6466617;
 CREATE DATABASE sql6466617;
 USE sql6466617;
 
+-- admin table to be manually filled 
 create table Admin_table(
     adminId varchar(15) primary key,   
     email varchar(30) not null,
     passwrd varchar(15) not null
 );
 
+-- device table to be manually filled
 create TABLE Devices(
     deviceId VARCHAR(15) PRIMARY key,
     catageory VARCHAR(15) not NULL,
     variant VARCHAR(15) not null, 
     quantity int NOT NULL,
-    img blob not null
+    img blob not null -- this is to be used 
+	-- img varchar(10) not null
 );
 
 create TABLE Users(
@@ -28,8 +31,8 @@ create TABLE Users(
 create TABLE Cart(
     cartId VARCHAR(15) PRIMARY key,
     devList VARCHAR(15) not NULL,
-    given boolean not null, 
-    returned boolean NOT NULL
+    given boolean default false, 
+    returned boolean default false
 );
 
 create TABLE Transactions(
@@ -40,7 +43,7 @@ create TABLE Transactions(
     endDate date NOT NULL,
     TransComp date ,
     compList VARCHAR(15),
-    foreign key(cart_Id) references Cart(cartId) on delete set null,
+    foreign key(cart_Id) references Cart(cartId),
     foreign key(roll_No) references Users(rollNo) 
 );
 
@@ -52,3 +55,7 @@ create TABLE Fine(
     foreign key(roll_No) references Users(rollNo) 
 );
 
+-- users table to be filled first 
+-- cart table to filled second
+-- transactions table to be filled at the end 
+-- fine table is auto mainted 

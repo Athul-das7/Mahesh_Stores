@@ -5,7 +5,7 @@ const session = require('express-session');
 const { v4: uuidv4 } = require("uuid");
 const { check, validationResult } = require('express-validator')
 
-const router = require('./router');
+const admin = require('./routes/admin');
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use('/route', router);
+app.use('/admin', admin);
 
 
 app.get('/',(req,res)=>{

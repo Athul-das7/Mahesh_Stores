@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="ordered.css">
+    <link rel="stylesheet" href="/static/ordered.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 
@@ -53,11 +53,14 @@
     </tr>
   </thead>
   <tbody>
+<% var i = 1 %>
+<%        orders.forEach(order=>{ %>
     <tr>
-      <th scope="row">1</th>
-      <td>1602-19-735-071</td>
-      <td>Athul</td>
-      <td>98xxxxxxxx</td>
+      <th scope="row"><%= i %>  </th>
+      <% i+=1 %> 
+      <td><%= order[0] %> </td>
+      <td><%= order[1] %> </td>
+      <td><%= order[2] %> </td>
       <td>
         <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,18 +68,12 @@
         </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <form>
+              <% const arr = order[3].split(',') %> 
+              <% arr.forEach( item =>{ %> 
               <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NodeMcuX1">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="<%= item %>  ">
               </div>
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NodeMcuX2">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="UltraX1">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="TempX1">
-              </div>
+              <% }) %> 
             </form>
           </div>
         </div>
@@ -85,38 +82,7 @@
           <button class="btn btn-success">Submit</button>
       </td>
     </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>
-        <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-        </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form>
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NodeMcuX1">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NodeMcuX2">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="UltraX1">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="TempX1">
-              </div>
-            </form>
-          </div>
-        </div>
-      </td>
-      <td>
-          <button class="btn btn-success">Submit</button>
-      </td>
-    </tr>
+<%        }) %>
   </tbody>
 </table>
 </div>

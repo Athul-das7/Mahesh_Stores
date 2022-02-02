@@ -48,9 +48,9 @@ router.get("/returned",async(req,res)=>{
         inner join Users on Transactions.roll_No = Users.rollNo
         inner join Cart on Cart.cartId = Transactions.cart_Id
         where compList is not NULL;`
-        const orders = await db.promise().query(sql)
-        console.log(orders);
-        res.render("returned",{user:req.session.user, orders:orders[0]})
+        const returned= await db.promise().query(sql)
+        // console.log(orders);
+        res.render("returned",{user:req.session.user, returned:returned[0]})
     }
     else {
         res.render('login')

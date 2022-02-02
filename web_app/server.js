@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const { v4: uuidv4 } = require("uuid");
 const { check, validationResult } = require('express-validator')
+const helmet = require('helmet')
 
 const admin = require('./routes/admin');
 
@@ -17,6 +18,8 @@ app.set('view engine', 'ejs');
 // body-parser 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(helmet())
 
 // load static assets
 app.use('/static', express.static(path.join(__dirname, 'public')))

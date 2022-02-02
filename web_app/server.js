@@ -8,9 +8,14 @@ const helmet = require('helmet')
 
 const admin = require('./routes/admin');
 
+var moment = require('moment');
+
+
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+app.locals.moment = require('moment');
 
 // view engine
 app.set('view engine', 'ejs');

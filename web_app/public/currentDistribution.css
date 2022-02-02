@@ -1,0 +1,9 @@
+#title{
+    font-size: 2em;
+    font-weight: 500;
+}
+.list-group-item {
+    height: 30px;    
+    text-align: center;
+    padding: 3px 15px !important;
+}

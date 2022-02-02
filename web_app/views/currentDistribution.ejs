@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/static/ordered.css">
+    <link rel="stylesheet" href="/static/currentDistribution.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 
@@ -40,46 +40,49 @@
     </form>
   </div>
 </nav>
-<div class="container">
-    <table class="table table-hover">
+<div class="container table-responsive">
+    <table class="table">
   <thead>
     <tr>
       <th scope="col">S.No.</th>
       <th scope="col">Roll-No</th>
       <th scope="col">Name</th>
       <th scope="col">Phone Number</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
       <th scope="col">Component Details</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
-<% var i = 1 %>
-<%orders.forEach(order=>{ %>
-    <tr>
-      <th scope="row"><%= i %>  </th>
-      <% i+=1 %> 
-      <td><%= order[0] %> </td>
-      <td><%= order[1] %> </td>
-      <td><%= order[2] %> </td>
-      <td>
-        <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown button
-        </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form action="/admin/ordered/<%= order[0] %>" method="POST" >
-              <% const arr = order[3].split(',') %> 
-              <% arr.forEach( item =>{ %> 
-              <div class="form-group dropdown-item">
-                <input type="text" autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="<%= item %>" name="compList">
-              </div>
-              <% }) %> 
-              <button class="btn btn-success">Submit</button>
-            </form>
-          </div>
-        </div>
-      </td>
-    </tr>
-<%        }) %>
+    <% var i = 1 %>
+    
+    <% currentD.forEach(order=>{ %>
+        
+        <tr>
+            
+            <th scope="row"><%= i %> </th>
+            <% i += 1 %> 
+            <td><%= order[0] %> </td>
+            <td><%= order[1] %> </td>
+            <td><%= order[2] %> </td>
+            <td><%= moment(order[3]).format("DD-MM-YYYY") %> </td>
+            <td><%= moment(order[4]).format("DD-MM-YYYY") %> </td>
+            <td>    <!--component details-->
+                <% const arr = order[5].split(',') %> 
+                    <ul class="list-group">
+                        <% arr.forEach( item =>{ %> 
+                            <li class="list-group-item"> <%= item %></li>
+                        <% }) %>      
+                    </ul>
+            </td>
+            <td >
+                <% if(order[6]) { %>
+                    <span style="background-color: lightgreen;">Returned</span>                 
+                <% } %>                           
+            </td>  
+        </tr>     
+    <% }) %>
   </tbody>
 </table>
 </div>

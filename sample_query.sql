@@ -2,7 +2,7 @@ INSERT INTO Admin_table(adminId,email,passwrd) VALUE
 ("1602-19-735-071","athuldas2017@gmail.com","don'tYouDare");
 
 INSERT INTO Devices(deviceId,catageory,variant,quantity,img) VALUE
-("em-nm","embedded","nodemcu",10,"abc");
+("em-nm","embedded","nodemcu",10,"/assets/gojo.png");
 
 INSERT INTO Users(rollNo,studentname,contact,email) VALUE
 ("1602-19-735-132","pradhumna","9876543210","pradhumna@gmail.com");

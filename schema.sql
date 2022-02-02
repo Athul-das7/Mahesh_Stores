@@ -14,18 +14,18 @@ create table Admin_table(
 -- device table to be manually filled
 create TABLE Devices(
     deviceId VARCHAR(15) PRIMARY key,
-    catageory VARCHAR(15) not NULL,
-    variant VARCHAR(15) not null, 
+    catageory VARCHAR(255) not NULL,
+    variant VARCHAR(255) not null, 
     quantity int NOT NULL,
-    img blob not null -- this is to be used 
+    img varchar(255) not null -- this is to be used 
 	-- img varchar(10) not null
 );
 
 create TABLE Users(
     rollNo VARCHAR(15) PRIMARY key,
-    studentname VARCHAR(15) not NULL,
+    studentname VARCHAR(255) not NULL,
     contact VARCHAR(10) not null, 
-    email VARCHAR(20) NOT NULL
+    email VARCHAR(30) NOT NULL
 );
 
 create TABLE Cart(
@@ -42,7 +42,7 @@ create TABLE Transactions(
     startDate date NOT NULL,
     endDate date NOT NULL,
     TransComp date ,
-    compList VARCHAR(15),
+    compList VARCHAR(255),
     foreign key(cart_Id) references Cart(cartId),
     foreign key(roll_No) references Users(rollNo) 
 );

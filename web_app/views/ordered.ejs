@@ -49,12 +49,11 @@
       <th scope="col">Name</th>
       <th scope="col">Phone Number</th>
       <th scope="col">Component Details</th>
-      <th scope="col">Given</th>
     </tr>
   </thead>
   <tbody>
 <% var i = 1 %>
-<%        orders.forEach(order=>{ %>
+<%orders.forEach(order=>{ %>
     <tr>
       <th scope="row"><%= i %>  </th>
       <% i+=1 %> 
@@ -67,19 +66,17 @@
             Dropdown button
         </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form>
+            <form action="/admin/ordered/<%= order[0] %>" method="POST" >
               <% const arr = order[3].split(',') %> 
               <% arr.forEach( item =>{ %> 
-              <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="<%= item %>  ">
+              <div class="form-group dropdown-item">
+                <input type="text" autocomplete="off" class="form-control" id="exampleInputEmail1" placeholder="<%= item %>" name="compList">
               </div>
               <% }) %> 
+              <button class="btn btn-success">Submit</button>
             </form>
           </div>
         </div>
-      </td>
-      <td>
-          <button class="btn btn-success">Submit</button>
       </td>
     </tr>
 <%        }) %>

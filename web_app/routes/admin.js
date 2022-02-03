@@ -1,3 +1,4 @@
+const { application } = require('express')
 var express=require('express')
 const { isRequired } = require('nodemon/lib/utils')
 var router = express.Router()
@@ -6,7 +7,7 @@ const db = require('../database')
 
 // login page
 router.get('/login',(req,res)=>{
-    res.render('login')
+    res.render('login',{incorrect:""})
 })
 
 // login post 
@@ -22,7 +23,7 @@ router.post('/login', async (req,res)=>{
         res.redirect('/admin/ordered')
     }
     else {
-        res.render('login',{incorrect:true})
+        res.render('login',{incorrect:"Incorrect username or password"})
     }
 })
 
@@ -38,7 +39,7 @@ router.get("/ordered",async(req,res)=>{
         res.render("ordered",{user:req.session.user, orders:orders[0]})
     }
     else {
-        res.render('login')
+        res.render('login',{incorrect:"Unauthorized User"})
     }
 })
 
@@ -55,7 +56,7 @@ router.get("/returned",async(req,res)=>{
         res.render("returned",{user:req.session.user, returned:returned[0]})
     }
     else {
-        res.render('login')
+        res.render('login',{incorrect:"Unauthorized User"})
     }
 })
 
@@ -67,7 +68,7 @@ router.get('/logout',(req,res)=>{
             res.send(err)
         }
         else {
-            res.render('login')
+            res.render('login',{incorrect:"Logged out"})
         }
     })
 })
@@ -101,7 +102,7 @@ router.post('/ordered/:rollno',async(req,res)=>{
         // console.log(userUpdate)
     }
     else {
-        res.render('login')
+        res.render('login',{incorrect:"Unauthorized User"})
     }
 })
 
@@ -117,7 +118,7 @@ router.get("/currentDistribution",async(req,res)=>{
         res.render("currentDistribution",{user:req.session.user, currentD:currentD[0]})
     }
     else {
-        res.render('login')
+        res.render('login',{incorrect:"Unauthorized User"})
     }
 })
 

@@ -1,0 +1,25 @@
+@media screen and (max-width: 600px) {
+    .box {
+      width: 100%;
+    }
+  }
+.box{
+    float: left;
+  width: 50%;
+  padding: 10px 50px;
+}  /*column properties*/
+
+.row:after {
+	
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+
+  .box img{
+    border : 2px solid black;
+    border-radius : 10px;
+  }
+ 
+  

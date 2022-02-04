@@ -8,6 +8,8 @@ const helmet = require('helmet')
 
 const admin = require('./routes/admin');
 
+const home = require('./routes/home');
+
 var moment = require('moment');
 
 
@@ -38,6 +40,7 @@ app.use(session({
 
 app.use('/admin', admin);
 
+app.use('/', home);
 
 app.get('/',(req,res)=>{
     console.log('working')

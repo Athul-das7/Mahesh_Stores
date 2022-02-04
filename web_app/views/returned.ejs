@@ -67,7 +67,21 @@
       <td><%= ret[1] %> </td>
       <td><%= ret[2] %> </td>
       <td>
-        
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown 
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <form action="/admin/ordered/<%= ret[0] %>" method="POST" >
+              <% const arr = ret[3].split(',') %> 
+              <% arr.forEach( item =>{ %> 
+              <div class="form-group dropdown-item">
+                <input type="text" autocomplete="off" class="form-control" placeholder="<%= item %>" name="compList">
+              </div>
+              <% }) %> 
+            </form>
+  </div>
+</div>
       </td>
       <td>
           <button class="btn btn-success">Submit</button>

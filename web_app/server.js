@@ -20,6 +20,7 @@ const port = process.env.PORT || 3000;
 app.locals.moment = require('moment');
 
 // view engine
+app.set('views','./views') //express.static(path.join(__dirname, 'views')))
 app.set('view engine', 'ejs');
 
 // body-parser 
@@ -27,6 +28,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(helmet())
+app.use(helmet.contentSecurityPolicy({
+				 directives: {
+				   defaultSrc: ["'self'"],
+				   scriptSrc: ["'self'",'stackpath.bootstrapcdn.com', 'code.jquery.com','fonts.gstatic.com', 'netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ],
+				   styleSrc: ["'self'", 'code.jquery.com', 'fonts.gstatic.com','netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ],
+				   fontSrc: ["'self'", 'code.jquery.com', 'fonts.gstatic.com','netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ]
+				 }
+				}));
 
 // load static assets
 app.use('/static', express.static(path.join(__dirname, 'public')))
@@ -44,7 +53,9 @@ app.use('/', home);
 
 app.get('/',(req,res)=>{
     console.log('working')
-    // res.render('login')
+    // res.redirect('/admin/login')
+    res.render('home',{incorrect:""})
+    // res.sendFile('F:/Programming/github/Mahesh_Stores/web_app/views/index.html')
 })
 
 app.listen(port,(req,res)=>{

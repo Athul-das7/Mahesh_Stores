@@ -69,7 +69,8 @@ router.get('/logout',(req,res)=>{
             res.send(err)
         }
         else {
-            res.render('login',{incorrect:"Logged out"})
+            // res.render('login',{incorrect:"Logged out"})
+            res.redirect('/')
         }
     })
 })

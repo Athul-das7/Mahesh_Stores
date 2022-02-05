@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const { v4: uuidv4 } = require("uuid");
 const { check, validationResult } = require('express-validator')
-const helmet = require('helmet')
+// const helmet = require('helmet')
 
 const admin = require('./routes/admin');
 
@@ -27,15 +27,15 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(helmet())
-app.use(helmet.contentSecurityPolicy({
-				 directives: {
-				   defaultSrc: ["'self'"],
-				   scriptSrc: ["'self'",'stackpath.bootstrapcdn.com', 'code.jquery.com','fonts.gstatic.com', 'netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ],
-				   styleSrc: ["'self'", 'code.jquery.com', 'fonts.gstatic.com','netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ],
-				   fontSrc: ["'self'", 'code.jquery.com', 'fonts.gstatic.com','netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ]
-				 }
-				}));
+// app.use(helmet())
+// app.use(helmet.contentSecurityPolicy({
+// 				 directives: {
+// 				   defaultSrc: ["'self'"],
+// 				   scriptSrc: ["'self'",'ajax.googleapis.com', 'stackpath.bootstrapcdn.com', 'code.jquery.com','fonts.gstatic.com', 'netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ],
+// 				   styleSrc: ["'self'",'pro.fontawesome.com','stackpath.bootstrapcdn.com', 'code.jquery.com', 'fonts.gstatic.com','netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ],
+// 				   fontSrc: ["'self'", 'code.jquery.com','pro.fontawesome.com', 'fonts.gstatic.com','netdna.bootstrapcdn.com','fonts.googleapis.com','maxcdn.bootstrapcdn.com','cdnjs.cloudflare.com','cdn.jsdelivr.net' ]
+// 				 }
+// 				}));
 
 // load static assets
 app.use('/static', express.static(path.join(__dirname, 'public')))

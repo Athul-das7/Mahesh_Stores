@@ -35,7 +35,7 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light p-3">
-  <a class="navbar-brand" id="title" href="#">Mahesh Stores</a>
+  <a class="navbar-brand" id="title" href="/admin/logout">Mahesh Stores</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -86,24 +86,12 @@
       <td><%= ret[1] %> </td>
       <td><%= ret[2] %> </td>
       <td>
-        <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown 
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form action="/admin/returned/<%= ret[0] %>" method="POST" >
-              <% const arr = ret[3].split(',') %> 
-              <% arr.forEach( item =>{ %> 
-              <div class="form-group dropdown-item">
-                <input type="text" autocomplete="off" class="form-control" placeholder="<%= item %>" name="compList">
-              </div>
-              <% }) %> 
-            </form>
-  </div>
-</div>
+        <%= ret[3] %> 
       </td>
       <td>
-          <button class="btn btn-success">Submit</button>
+        <form action="/admin/returned" method="POST" >
+          <button class="btn btn-success" name="transId" value="<%= ret[4] %>">Submit</button>
+        </form>
       </td>
     </tr>
 <%        }) %>

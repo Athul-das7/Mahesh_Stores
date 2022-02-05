@@ -4,6 +4,8 @@ const { isRequired } = require('nodemon/lib/utils')
 var router = express.Router()
 const db = require('../database')
 
+var moment = require('moment');
+// router.locals.moment = require('moment');
 
 // login page
 router.get('/login',(req,res)=>{
@@ -51,9 +53,10 @@ router.get("/returned",async(req,res)=>{
         from Transactions
         inner join Users on Transactions.roll_No = Users.rollNo
         inner join Cart on Cart.cartId = Transactions.cart_Id
-        where TransComp is NULL and compList is not Null;`
+        where returnDate is NULL and compList is not Null;`
         const returned= await db.promise().query(sql)
-        console.log(returned);
+        console.log(returned[0]);
+        console.log( moment().format('DD/MM/YYYY'));
         res.render("returned",{user:req.session.user, returned:returned[0]})
     }
     else {
@@ -75,32 +78,68 @@ router.get('/logout',(req,res)=>{
     })
 })
 
-router.post('/ordered/:rollno',async(req,res)=>{
-    console.log(req.params);
+router.post('/returned', async(req,res)=>{
+    console.log(req.body)
+    // res.send(req.body)
     if ( req.session.user ){
         console.log(req.body)
-        let sql =`Select cart_Id from Transactions where roll_no=? and compList is null`
-        // const cartId = await db.promise().query(sql,[req.params.rollno])
+        let sql =`Select cart_Id from Transactions where transId = ?`
+        const cartId = await db.promise().query(sql,[req.body.transId])
 
-        // sql =`update Transactions 
-        // Set compList=?
-        // where roll_no=? and compList is null`
-        // const updateuser = await db.promise().query(sql,[req.body.compList.toString(),req.params.rollno])
-        // // res.send(req.body)
+        sql =`update Transactions 
+        Set returnDate=?
+        where transId=?`
+        const updateuser = await db.promise().query(sql,[moment().format('DD/MM/YYYY'),req.body.transId])
+        // res.send(req.body)
 
-        // // console.log(cartId[0][0][0]);
-        // sql =`update Cart 
-        // Set given=true
-        // where cartId=?`
-        // const transId = await db.promise().query(sql,[cartId[0][0][0]])
+        // console.log(cartId[0][0][0]);
+        sql =`update Cart 
+        Set returned=true
+        where cartId=?`
+        const transId = await db.promise().query(sql,[cartId[0][0][0]])
 
-        sql = `select  Users.rollNo, Users.studentname, Users.contact, Cart.devList, transId
-        from Transactions
-        inner join Users on Transactions.roll_No = Users.rollNo
-        inner join Cart on Cart.cartId = Transactions.cart_Id
-        where compList is NULL;`
-        const orders = await db.promise().query(sql)
-        res.render("ordered",{user:req.session.user, orders:orders[0]})
+        // sql = `select  Users.rollNo, Users.studentname, Users.contact, Cart.devList, transId
+        // from Transactions
+        // inner join Users on Transactions.roll_No = Users.rollNo
+        // inner join Cart on Cart.cartId = Transactions.cart_Id
+        // where compList is NULL;`
+        // const orders = await db.promise().query(sql)
+        // res.render("ordered",{user:req.session.user, orders:orders[0]})
+        res.redirect('/admin/returned')
+        // // console.log(userUpdate)
+    }
+    else {
+        res.render('login',{incorrect:"Unauthorized User"})
+    }
+})
+
+router.post('/ordered/',async(req,res)=>{
+    // console.log(req.params);
+    if ( req.session.user ){
+        console.log(req.body)
+        let sql =`Select cart_Id from Transactions where transId = ?`
+        const cartId = await db.promise().query(sql,[req.body.transId])
+
+        sql =`update Transactions 
+        Set compList=?
+        where transId=?`
+        const updateuser = await db.promise().query(sql,[req.body.compList.toString(),req.body.transId])
+        // res.send(req.body)
+
+        // console.log(cartId[0][0][0]);
+        sql =`update Cart 
+        Set given=true
+        where cartId=?`
+        const transId = await db.promise().query(sql,[cartId[0][0][0]])
+
+        // sql = `select  Users.rollNo, Users.studentname, Users.contact, Cart.devList, transId
+        // from Transactions
+        // inner join Users on Transactions.roll_No = Users.rollNo
+        // inner join Cart on Cart.cartId = Transactions.cart_Id
+        // where compList is NULL;`
+        // const orders = await db.promise().query(sql)
+        // res.render("ordered",{user:req.session.user, orders:orders[0]})
+        res.redirect('/admin/ordered')
         // // console.log(userUpdate)
     }
     else {
@@ -110,7 +149,7 @@ router.post('/ordered/:rollno',async(req,res)=>{
 
 router.get("/currentDistribution",async(req,res)=>{
     if ( req.session.user ){
-        const sql = `select  Users.rollNo, Users.studentname, Users.contact,startDate, endDate, compList, TransComp, transId
+        const sql = `select  Users.rollNo, Users.studentname, Users.contact,startDate, endDate, compList, returnDate, transId
         from Transactions
         inner join Users on Transactions.roll_No = Users.rollNo
         inner join Cart on Cart.cartId = Transactions.cart_Id

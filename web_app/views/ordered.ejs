@@ -24,7 +24,7 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light p-3">
-  <a class="navbar-brand" id="title" href="/">Mahesh Stores</a>
+  <a class="navbar-brand" id="title" href="/admin/logout">Mahesh Stores</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -79,7 +79,7 @@
     Dropdown 
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <form action="/admin/ordered/<%= order[0] %>" method="POST" >
+            <form action="/admin/ordered" method="POST" >
               <% const arr = order[3].split(',') %> 
               <% arr.forEach( item =>{ %> 
               <div class="form-group dropdown-item">

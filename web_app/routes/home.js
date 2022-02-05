@@ -5,7 +5,7 @@ var router = express.Router()
 const db = require('../database')
 
 
-router.get('/home',(req,res)=>{
+router.get('/',(req,res)=>{
     res.render('home',{incorrect:""})
     // console.log(req.body);
     // console.log(req.params);

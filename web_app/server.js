@@ -51,12 +51,12 @@ app.use('/admin', admin);
 
 app.use('/', home);
 
-app.get('/',(req,res)=>{
-    console.log('working')
-    // res.redirect('/admin/login')
-    res.render('home',{incorrect:""})
-    // res.sendFile('F:/Programming/github/Mahesh_Stores/web_app/views/index.html')
-})
+// app.get('/',(req,res)=>{
+//     console.log('working')
+//     // res.redirect('/admin/login')
+//     res.render('home',{incorrect:""})
+//     // res.sendFile('F:/Programming/github/Mahesh_Stores/web_app/views/mid_page.html')
+// })
 
 app.listen(port,(req,res)=>{
     console.log('listening at http://localhost:3000');

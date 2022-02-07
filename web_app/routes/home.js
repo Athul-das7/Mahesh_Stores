@@ -9,8 +9,8 @@ router.get('/',async(req,res)=>{
     
     const sql = `select distinct catageory from Devices;`
     const catageories = await db.promise().query(sql)
-    console.log(catageories);
-    console.log(catageories[0])
+    // console.log(catageories);
+    // console.log(catageories[0])
     res.render("homems",{catageories:catageories[0]})
 })
 

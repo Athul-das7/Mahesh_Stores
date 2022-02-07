@@ -138,7 +138,7 @@ router.post('/ordered/',async(req,res)=>{
     // // console.log(userUpdate)
 })
 
-router.get("/currentDistribution",async(req,res)=>{
+router.get("/history",async(req,res)=>{
     const sql = `select  Users.rollNo, Users.studentname, Users.contact,startDate, endDate, compList, returnDate, transId
     from Transactions
     inner join Users on Transactions.roll_No = Users.rollNo
@@ -147,7 +147,7 @@ router.get("/currentDistribution",async(req,res)=>{
     const currentD = await db.promise().query(sql)
     console.log(currentD);
     // console.log(currentD[0])
-    res.render("currentDistribution",{user:req.session.user, currentD:currentD[0]})
+    res.render("history",{user:req.session.user, currentD:currentD[0]})
 })
 
 

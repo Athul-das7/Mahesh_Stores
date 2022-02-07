@@ -158,16 +158,22 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>  <!--don't remove this-->
 
-        <!--Js script for dactpicker-->
+        <!--Js script for dactpicker-->       
         <script type="text/javascript">
             $(function(){
+                var date = new Date();
+                date.setDate(date.getDate());     // to set start date in calender to current date
                 $('#datepicker1').datepicker({
                         autoclose: true,
-                        format: 'dd/mm/yyyy'
+                        format: 'dd/mm/yyyy',
+                        startDate: date   // to set start date in calender to current date
                     }).on('changeDate', function (selected) {
                         var minDate = new Date(selected.date);
                         minDate.setDate(minDate.getDate() + 1);
                         $('#datepicker2').datepicker('setStartDate', minDate);
+                        var maxDate = new Date(selected.date);
+                        maxDate.setDate(maxDate.getDate()+30)
+                        $('#datepicker2').datepicker('setEndDate', maxDate);    
                     });
             })
             $(function(){

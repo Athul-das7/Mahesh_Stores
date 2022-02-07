@@ -22,7 +22,7 @@ create TABLE Devices(
 );
 
 create TABLE Users(
-    rollNo VARCHAR(15) PRIMARY key,
+    rollNo VARCHAR(20) PRIMARY key,
     studentname VARCHAR(255) not NULL,
     contact VARCHAR(10) not null, 
     email VARCHAR(30) NOT NULL
@@ -30,7 +30,7 @@ create TABLE Users(
 
 create TABLE Cart(
     cartId VARCHAR(15) PRIMARY key,
-    devList VARCHAR(15) not NULL,
+    devList VARCHAR(255) not NULL,
     given boolean default false, 
     returned boolean default false
 );
@@ -41,7 +41,7 @@ create TABLE Transactions(
     roll_No VARCHAR(15) not null, 
     startDate date NOT NULL,
     endDate date NOT NULL,
-    TransComp date ,
+    returnDate date ,
     compList VARCHAR(255),
     foreign key(cart_Id) references Cart(cartId),
     foreign key(roll_No) references Users(rollNo) 

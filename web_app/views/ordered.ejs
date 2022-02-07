@@ -44,7 +44,7 @@
         <a class="nav-link" href="#">Fine List</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/admin/currentDistribution">Current distribution</a>
+        <a class="nav-link" href="/admin/currentDistribution">History</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="/admin/logout">
@@ -86,7 +86,9 @@
                 <input type="text" autocomplete="off" class="form-control" placeholder="<%= item %>" name="compList">
               </div>
               <% }) %> 
-              <button name="transId" value="<%= order[4] %>" class="btn btn-success">Submit</button>
+              <div class="container d-flex justify-content-center">
+                <button name="transId" value="<%= order[4] %>" class="btn btn-success">Submit</button>
+              </div>
             </form>
   </div>
 </div>

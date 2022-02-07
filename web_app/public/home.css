@@ -148,3 +148,27 @@ width: 100%;
     height: 60px;
 }
 
+#catname{
+    margin-top: 34px;
+    height: 21px;  
+    font-size: 15px;                                   
+    width: 200px;
+    text-align: center; 
+    margin-left:0px;
+    margin-right: 0px;
+    background-color: transparent;
+    border: 0px solid; 
+    outline: none;
+    cursor: none !important;
+}
+#submitbtn{
+    background-image: linear-gradient(to left, rgb(28, 171, 162) 25%, rgb(28, 127, 171)); 
+    border-radius: 100px; 
+    width: 100%;
+    height: 60px; 
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 18px;
+    border: medium none; 
+    margin-top: 30px;
+}

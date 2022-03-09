@@ -2,24 +2,51 @@ const { application } = require('express')
 var express=require('express')
 const { isRequired } = require('nodemon/lib/utils')
 var router = express.Router()
-const db = require('../database')
+const db = require('../firebase')// require('../database')
+const { check, validationResult } = require('express-validator')
 
 var moment = require('moment');
-// router.locals.moment = require('moment');
 
 // login page
-router.get('/login',(req,res)=>{
+router.get('/login', async (req,res)=>{
     res.render('login',{incorrect:""})
 })
 
 // login post 
-router.post('/login', async (req,res)=>{
-    const results = await db.promise().query(`select * from Admin_table where email=? ;`,[req.body.email])
-    var user=false;
-    console.log('working');
-    if( results[0].length >= 1 ){
-        if ( results[0][0][2] == req.body.password ) user = true 
+router.post('/login',[
+    check('password','this field must atleast be 4 characters')
+    .exists().isLength({min:4})
+], async (req,res)=>{
+    const errors = validationResult(req)
+    console.log(errors);
+    if (!errors.isEmpty()){
+        res.render('login',{incorrect:"Minimum 4 characters"})
     }
+    // .where('test','==','null')
+    // db.collection('transactions')
+    // .document('FvdNvgkc1gQKLyvDuxOV') 
+    // .update({
+    //     'test':'working'
+    // })
+    db.collection("transactions")
+  .document("FvdNvgkc1gQKLyvDuxOV")
+  .update({
+    "test": "hello"
+  });
+    // const results = await db.promise().query(`select * from Admin_table where email=? ;`,[req.body.email])
+    var user=false;
+    const results = await db.collection('admins')
+    .where('password','==',req.body.password)
+    .where('email','==',req.body.email).get()
+    results.forEach(doc=>{
+        const fields = doc.data();
+        console.log(doc.id,'=>',doc.data());
+        if ( fields.password == req.body.password ) user=true;
+    })
+    console.log(user)
+
+    // console.log(results.id);
+    console.log('working');
     if ( user ) {
         req.session.user = req.body.email
         res.redirect('/admin/ordered')
@@ -37,17 +64,15 @@ router.get('/logout',(req,res)=>{
             res.send(err)
         }
         else {
-            // res.render('login',{incorrect:"Logged out"})
             res.redirect('/')
         }
     })
 })
 
-// middle to check user authentication
+// middleware to check user authentication
 router.use((req,res,next)=>{
     if( !req.session.user ){
         res.render('login',{incorrect:"Unauthorized user"})
-        // res.redirect('/admin/login')
     }
     else next()
 })
@@ -59,6 +84,9 @@ router.get("/ordered",async(req,res)=>{
     inner join Users on Transactions.roll_No = Users.rollNo
     inner join Cart on Cart.cartId = Transactions.cart_Id
     where compList is NULL;`
+    // const orders = db.collection(transactions)
+    // .where(components,'==','undefined')
+
     const orders = await db.promise().query(sql)
     console.log(orders[0]);
     res.render("ordered",{user:req.session.user, orders:orders[0]})
@@ -78,9 +106,6 @@ router.get("/returned",async(req,res)=>{
 })
 
 router.post('/returned', async(req,res)=>{
-    console.log(req.body)
-    // res.send(req.body)
-    console.log(req.body)
     let sql =`Select cart_Id from Transactions where transId = ?`
     const cartId = await db.promise().query(sql,[req.body.transId])
 
@@ -88,54 +113,40 @@ router.post('/returned', async(req,res)=>{
     Set returnDate=?
     where transId=?`
     const updateuser = await db.promise().query(sql,[moment().format('DD/MM/YYYY'),req.body.transId])
-    // res.send(req.body)
 
-    // console.log(cartId[0][0][0]);
     sql =`update Cart 
     Set returned=true
     where cartId=?`
     const transId = await db.promise().query(sql,[cartId[0][0][0]])
 
-    // sql = `select  Users.rollNo, Users.studentname, Users.contact, Cart.devList, transId
-    // from Transactions
-    // inner join Users on Transactions.roll_No = Users.rollNo
-    // inner join Cart on Cart.cartId = Transactions.cart_Id
-    // where compList is NULL;`
-    // const orders = await db.promise().query(sql)
-    // res.render("ordered",{user:req.session.user, orders:orders[0]})
     res.redirect('/admin/returned')
-    // // console.log(userUpdate)
 })
 
-router.post('/ordered/',async(req,res)=>{
-    // console.log(req.params);
-    console.log(req.body)
-    let sql =`Select cart_Id from Transactions where transId = ?`
-    const cartId = await db.promise().query(sql,[req.body.transId])
+router.post('/ordered/', async(req,res)=>{
 
-    sql =`update Transactions 
-    Set compList=?
-    where transId=?`
-    console.log(req.body.compList.length);
+    arr=req.body.compList
+    let reload=false
+    for (let i = 0; i < arr.length; i++) {
+        if ( arr[i].length == 0 )  reload = true;
+    }
+    if ( reload ) res.redirect('/admin/ordered')
+    else {
+        let sql =`Select cart_Id from Transactions where transId = ?`
+        const cartId = await db.promise().query(sql,[req.body.transId])
 
-    // const updateuser = await db.promise().query(sql,[req.body.compList.toString(),req.body.transId])
-    // // res.send(req.body)
+        sql =`update Transactions 
+        Set compList=?
+        where transId=?`
 
-    // // console.log(cartId[0][0][0]);
-    // sql =`update Cart 
-    // Set given=true
-    // where cartId=?`
-    // const transId = await db.promise().query(sql,[cartId[0][0][0]])
+        const updateuser = await db.promise().query(sql,[req.body.compList.toString(),req.body.transId])
 
-    // sql = `select  Users.rollNo, Users.studentname, Users.contact, Cart.devList, transId
-    // from Transactions
-    // inner join Users on Transactions.roll_No = Users.rollNo
-    // inner join Cart on Cart.cartId = Transactions.cart_Id
-    // where compList is NULL;`
-    // const orders = await db.promise().query(sql)
-    // res.render("ordered",{user:req.session.user, orders:orders[0]})
-    res.redirect('/admin/ordered')
-    // // console.log(userUpdate)
+        sql =`update Cart 
+        Set given=true
+        where cartId=?`
+        const transId = await db.promise().query(sql,[cartId[0][0][0]])
+
+        res.redirect('/admin/ordered')
+    }
 })
 
 router.get("/history",async(req,res)=>{

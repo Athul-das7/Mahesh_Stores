@@ -17,36 +17,23 @@ router.post('/login',[
     check('password','this field must atleast be 4 characters')
     .exists().isLength({min:4})
 ], async (req,res)=>{
+
     const errors = validationResult(req)
-    console.log(errors);
+    // console.log(errors);
     if (!errors.isEmpty()){
         res.render('login',{incorrect:"Minimum 4 characters"})
     }
-    // .where('test','==','null')
-    // db.collection('transactions')
-    // .document('FvdNvgkc1gQKLyvDuxOV') 
-    // .update({
-    //     'test':'working'
-    // })
-    db.collection("transactions")
-  .document("FvdNvgkc1gQKLyvDuxOV")
-  .update({
-    "test": "hello"
-  });
-    // const results = await db.promise().query(`select * from Admin_table where email=? ;`,[req.body.email])
     var user=false;
     const results = await db.collection('admins')
     .where('password','==',req.body.password)
     .where('email','==',req.body.email).get()
     results.forEach(doc=>{
         const fields = doc.data();
-        console.log(doc.id,'=>',doc.data());
+        // console.log(doc.id,'=>',doc.data());
         if ( fields.password == req.body.password ) user=true;
     })
-    console.log(user)
+    // console.log(user)
 
-    // console.log(results.id);
-    console.log('working');
     if ( user ) {
         req.session.user = req.body.email
         res.redirect('/admin/ordered')
@@ -79,33 +66,50 @@ router.use((req,res,next)=>{
 
 // order page 
 router.get("/ordered",async(req,res)=>{
-    const sql = `select  Users.rollNo, Users.studentname, Users.contact, Cart.devList, transId
-    from Transactions
-    inner join Users on Transactions.roll_No = Users.rollNo
-    inner join Cart on Cart.cartId = Transactions.cart_Id
-    where compList is NULL;`
-    // const orders = db.collection(transactions)
-    // .where(components,'==','undefined')
-
-    const orders = await db.promise().query(sql)
-    console.log(orders[0]);
-    res.render("ordered",{user:req.session.user, orders:orders[0]})
+    const ordered = await db.collection('transactions')
+        .where('status','==',0)
+        .get();
+    var arr= new Array();
+    ordered.forEach(doc=>{
+        // console.log('entered')
+        // console.log(doc.data());
+        arr.push(doc.data());
+        arr.push(doc.id);
+        // console.log(arr);
+    })
+    // res.render("ordered",{user:req.session.user, orders:arr})
+    res.json(arr)
 })
 
 // returned page 
 router.get("/returned",async(req,res)=>{
-    const sql = `select  Users.rollNo, Users.studentname, Users.contact, compList, transId
-    from Transactions
-    inner join Users on Transactions.roll_No = Users.rollNo
-    inner join Cart on Cart.cartId = Transactions.cart_Id
-    where returnDate is NULL and compList is not Null;`
-    const returned= await db.promise().query(sql)
-    console.log(returned[0]);
+    var returned = await db.collection('transactions')
+                        .where('status','==',1)
+                        .get();
+    // returned = await returned.where('return-date','==',null);
+    // returned = await returned.where('components','!=',null)
+    // returned = await returned.orderBy('start-date').get();
+    var arr = new Array();
+    console.log(returned)
+    returned.forEach(doc=>{
+        arr.push(doc.data());
+        arr.push(doc.id);
+    })
     console.log( moment().format('DD/MM/YYYY'));
-    res.render("returned",{user:req.session.user, returned:returned[0]})
+    // res.render("returned",{user:req.session.user, returns:arr})
+    res.json(arr);
 })
 
 router.post('/returned', async(req,res)=>{
+    db.collection('users').get('1602-19-735-071').then(q=>{
+    q.forEach(doc=>{
+        console.log(doc.data())
+        db.doc(`users/${doc.id}`).update({
+        'number':986696234,
+        'test':'helloooo'
+        })
+    })
+    })
     let sql =`Select cart_Id from Transactions where transId = ?`
     const cartId = await db.promise().query(sql,[req.body.transId])
 

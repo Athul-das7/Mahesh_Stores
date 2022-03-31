@@ -54,13 +54,13 @@
   </thead>
   <tbody>
 <% var i = 1 %>
-<%orders.forEach(order=>{ %>
+<%for ( var i = 0; i < orders.length; i+=2 ) { %}>
     <tr>
       <th scope="row"><%= i %>  </th>
       <% i+=1 %> 
-      <td><%= order[0] %> </td>
-      <td><%= order[1] %> </td>
-      <td><%= order[2] %> </td>
+      <td><%= orders[i].user.rollNo %> </td>
+      <td><%= orders[i].user.name %> </td>
+      <td><%= orders[i].user.phone %> </td>
       <td>
         <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,14 +68,13 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <form action="/admin/ordered" method="POST" >
-              <% const arr = order[3].split(',') %> 
-              <% arr.forEach( item =>{ %> 
+              <% orders[i].cartComponents.forEach( item =>{ %> 
               <div class="form-group dropdown-item">
                 <input type="text" autocomplete="off" class="form-control" placeholder="<%= item %>" name="compList">
               </div>
               <% }) %> 
               <div class="container d-flex justify-content-center">
-                <button name="transId" value="<%= order[4] %>" class="btn btn-success">Submit</button>
+                <button name="transId" value="<%= orders[i+1] %>" class="btn btn-success">Submit</button>
               </div>
             </form>
   </div>

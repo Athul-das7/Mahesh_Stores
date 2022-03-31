@@ -54,15 +54,15 @@
   </thead>
   <tbody>
 <% var i = 1 %>
-<%        returned.forEach(ret=>{ %>
+<%        returns.forEach(ret=>{ %>
     <tr>
       <th scope="row"><%= i %> </th>
       <% i += 1 %> 
-      <td><%= ret[0] %> </td>
-      <td><%= ret[1] %> </td>
-      <td><%= ret[2] %> </td>
+      <td><%= ret.user.name %> </td>
+      <td><%= ret.user.name %> </td>
+      <td><%= ret.user.phone %> </td>
       <td>
-        <%= ret[3] %> 
+        <%= ret.components %> 
       </td>
       <td>
         <form action="/admin/returned" method="POST" >

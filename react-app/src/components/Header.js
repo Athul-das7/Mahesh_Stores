@@ -2,7 +2,13 @@ import React from 'react'
 import img1 from '../img/logo1.jpg';
 import {Link} from 'react-router-dom';
 import{FaBars} from 'react-icons/fa'
+import {useSelector} from "react-redux";
+
+
+
 function Header() {
+
+    const {cartItems} = useSelector(state=>state.cartReducer)
   return (
     <div className='header'>
         <nav className="navbar navbar-expand-lg navbar-light  py-2">
@@ -24,7 +30,10 @@ function Header() {
                     <Link className="nav-link"to="/">Contact US</Link>
                 </li>
                 <li className="nav-item " >
-                    <Link className="nav-link"to="/">Cart</Link>
+                    <Link className="nav-link" to="/cart">
+                    
+                        Cart {cartItems.length}
+                    </Link>
                 </li>
                 </ul>
             </div>

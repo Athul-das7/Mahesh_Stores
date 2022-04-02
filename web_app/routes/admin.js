@@ -17,7 +17,7 @@ router.post('/login',[
     check('password','this field must atleast be 4 characters')
     .exists().isLength({min:4})
 ], async (req,res)=>{
-
+    console.log(req.body)
     const errors = validationResult(req)
     // console.log(errors);
     if (!errors.isEmpty()){
@@ -34,13 +34,16 @@ router.post('/login',[
     })
     // console.log(user)
 
-    if ( user ) {
-        req.session.user = req.body.email
-        res.redirect('/admin/ordered')
-    }
-    else {
-        res.render('login',{incorrect:"Incorrect username or password"})
-    }
+    req.session.user = req.body.email
+    // res.json(user);
+    res.redirect('/admin/ordered')
+    // if ( user ) {
+    //     req.session.user = req.body.email
+    //     res.redirect('/admin/ordered')
+    // }
+    // else {
+    //     res.render('login',{incorrect:"Incorrect username or password"})
+    // }
 })
 
 // logout route 
@@ -57,12 +60,12 @@ router.get('/logout',(req,res)=>{
 })
 
 // middleware to check user authentication
-router.use((req,res,next)=>{
-    if( !req.session.user ){
-        res.render('login',{incorrect:"Unauthorized user"})
-    }
-    else next()
-})
+// router.use((req,res,next)=>{
+//     if( !req.session.user ){
+//         res.render('login',{incorrect:"Unauthorized user"})
+//     }
+//     else next()
+// })
 
 // order page 
 router.get("/ordered",async(req,res)=>{
@@ -73,8 +76,11 @@ router.get("/ordered",async(req,res)=>{
     ordered.forEach(doc=>{
         // console.log('entered')
         // console.log(doc.data());
-        arr.push(doc.data());
-        arr.push(doc.id);
+        const obj = {
+            id : doc.id,
+            ...doc.data()
+        }
+        arr.push(obj);
         // console.log(arr);
     })
     // res.render("ordered",{user:req.session.user, orders:arr})
@@ -92,8 +98,11 @@ router.get("/returned",async(req,res)=>{
     var arr = new Array();
     console.log(returned)
     returned.forEach(doc=>{
-        arr.push(doc.data());
-        arr.push(doc.id);
+        const obj = {
+            id : doc.id,
+            ...doc.data()
+        }
+        arr.push(obj);
     })
     console.log( moment().format('DD/MM/YYYY'));
     // res.render("returned",{user:req.session.user, returns:arr})

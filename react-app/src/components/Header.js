@@ -18,16 +18,16 @@ function Header() {
                     
                 </li>
                 <li className="nav-item" >
-                    <Link className="nav-link"to="/">Abort</Link>
+                    <Link className="nav-link" to="/">Abort</Link>
                 </li>
                 <li className="nav-item ">
-                    <Link className="nav-link"to="/">Contact US</Link>
+                    <Link className="nav-link" to="/">Contact US</Link>
                 </li>
                 <li className="nav-item " >
-                    <Link className="nav-link"to="/">Cart</Link>
+                    <Link className="nav-link" to="/">Cart</Link>
                 </li>
                 <li className="nav-item " >
-                    <Link className="nav-link"to="/admin">Admin</Link>
+                    <Link className="nav-link" to="/admin" state={{status:-1}}>Admin</Link>
                 </li>
                 </ul>
             </div>

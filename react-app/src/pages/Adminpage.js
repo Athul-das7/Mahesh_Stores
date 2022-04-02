@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
 import Layout from '../components/Admin'
 import Alert from './Alert'
 
@@ -9,7 +10,7 @@ function Adminpage(props) {
         <div className="row">
             <div className="col-md-4 col-sm-2 col-xs-12"></div>
             <div className="col-md-4 col-sm-8 col-xs-12">
-                <form className="form-container" action="http://localhost:5000/admin/login" method="POST">
+                <form className="form-container login-form" action="http://localhost:5000/admin/login" method="POST">
                     <h1 className="pad">Admin Login Page</h1>
                       <Alert status={props.status}/>
                         <div className="mb-3 pad"> <label for="exampleInputEmail1" className="form-label">Email address</label>

@@ -8,8 +8,8 @@ import Productinfo from './pages/Productinfo';
 import Cartpage from './pages/Cartpage';
 import Adminpage from './pages/Adminpage';
 import './stylesheets/Layout.css'
-import './stylesheets/login.css'
 import './stylesheets/products.css'
+import './stylesheets/Admin.css'
 function App() {
   return (
     <div className="App">

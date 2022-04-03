@@ -35,8 +35,8 @@ router.post('/login',[
     // console.log(user)
 
     req.session.user = req.body.email
-    // res.json(user);
-    res.redirect('/admin/ordered')
+    res.json(user);
+    // res.redirect('/admin/ordered')
     // if ( user ) {
     //     req.session.user = req.body.email
     //     res.redirect('/admin/ordered')
@@ -81,6 +81,7 @@ router.get("/ordered",async(req,res)=>{
             ...doc.data()
         }
         arr.push(obj);
+        // console.log(obj);
         // console.log(arr);
     })
     // res.render("ordered",{user:req.session.user, orders:arr})

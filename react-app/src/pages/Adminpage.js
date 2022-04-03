@@ -8,10 +8,10 @@ import axios from 'axios'
 
 function Adminpage(props) {
     const navigate = useNavigate()
-    const [test,setTest] = useState(['todo 1','todo 2']);
+    const [status,setStatus] = useState(()=>{ return -1 });
     const emailField = useRef()
     const passwordField = useRef()
-    var status = props.status;
+    // var status = props.status;
     // status = props.status
     console.log(props)
     // console.log(emailField.current.value)
@@ -25,7 +25,7 @@ function Adminpage(props) {
             email: email,
             password: password
         }
-        console.log(email)
+        console.log(user)
         // alert(password)
         let axiosConfig = {
             headers: {
@@ -35,13 +35,14 @@ function Adminpage(props) {
             };
         axios.post('http://localhost:5000/admin/login',user,axiosConfig)
             .then(res=>{
-                alert('login success')
-                console.log(res.data)
-                if ( res.data ) {
-                    navigate(`/`)
+                // alert('login success')
+                console.log('data',res.data)
+                if ( res.data === true ) {
+                    navigate(`/admin/orders`)
                 }
                 else{
-                    navigate(`/admin`,{status:0})
+                    // navigate(`/admin`,{status:0})
+                    setStatus(0);
                 }
 
             })
@@ -62,7 +63,7 @@ function Adminpage(props) {
             <div className="col-md-4 col-sm-8 col-xs-12">
                 <form className="form-container login-form" onSubmit={handleSubmit}>
                     <h1 className="pad">Admin Login Page</h1>
-                      <Alert status={props.status}/>
+                      <Alert status={status}/>
                     <div className="mb-3 pad"> 
                         <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                         <input ref={emailField} placeholdertype="email" class="form-control" placeholder="Email" name="email" />

@@ -7,6 +7,7 @@ import Registerpage from './pages/Registerpage';
 import Productinfo from './pages/Productinfo';
 import Cartpage from './pages/Cartpage';
 import Adminpage from './pages/Adminpage';
+import Ordered from './pages/Ordered';
 import './stylesheets/Layout.css'
 import './stylesheets/products.css'
 import './stylesheets/Admin.css'
@@ -22,6 +23,7 @@ function App() {
               <Route path='/productinfo/:productid' exact element={<Productinfo />} />
               <Route path='/cart' exact element={<Cartpage />} />
               <Route path='/admin' exact element={<Adminpage/>} />
+              <Route path='/admin/orders' exact element={<Ordered/>} />
               
           </Routes>
       </BrowserRouter>

@@ -1,11 +1,6 @@
 # Mahesh_Stores
 
-            <form action="/admin/ordered/<%= order[0] %>" method="POST" >
-              <% const arr = order[3].split(',') %> 
-              <% arr.forEach( item =>{ %> 
-              <div class="form-group dropdown-item">
-                <input type="text" autocomplete="off" class="form-control" placeholder="<%= item %>" name="compList">
-              </div>
-              <% }) %> 
-              <button name="transId" value="<%= order[4] %>" class="btn btn-success">Submit</button>
-            </form>
+Guide Lines 
+Don't use hyphens in firestore fields. Instead use underscore.
+Set a default field names and everyone shall use the same.
+Make sure the name corresponds to the functionality you are looking for.

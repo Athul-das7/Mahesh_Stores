@@ -27,3 +27,13 @@
     padding: 10px 10px 10px 10px;
     padding-top: 25px;
 }
+
+.custom-nav{
+    background-color: rgba(52, 52, 52, 0.564) !important;
+    color: white !important;
+}
+
+.cus-col{
+    color: white !important;
+    font-weight: bold !important;
+}

@@ -8,12 +8,17 @@ import axios from 'axios'
 
 function Adminpage(props) {
     const navigate = useNavigate()
-    const [status,setStatus] = useState(()=>{ return -1 });
+    const [status,setStatus] = useState(()=>{ 
+        if ( props.status === undefined || props.status === -1 )
+        return -1 
+        else return props.status
+    });
+    const [auth,setAuth] = useState(false)
     const emailField = useRef()
     const passwordField = useRef()
     // var status = props.status;
     // status = props.status
-    console.log(props)
+    console.log('props',props.value)
     // console.log(emailField.current.value)
     // console.log(test)
 
@@ -38,7 +43,8 @@ function Adminpage(props) {
                 // alert('login success')
                 console.log('data',res.data)
                 if ( res.data === true ) {
-                    navigate(`/admin/orders`)
+                    setAuth(true)
+                    navigate(`/admin/orders`,{auth:auth})
                 }
                 else{
                     // navigate(`/admin`,{status:0})

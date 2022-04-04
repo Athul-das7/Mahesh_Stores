@@ -60,12 +60,12 @@ router.get('/logout',(req,res)=>{
 })
 
 // middleware to check user authentication
-// router.use((req,res,next)=>{
-//     if( !req.session.user ){
-//         res.render('login',{incorrect:"Unauthorized user"})
-//     }
-//     else next()
-// })
+router.use((req,res,next)=>{
+    if( !req.session.user ){
+        res.render('login',{incorrect:"Unauthorized user"})
+    }
+    else next()
+})
 
 // order page 
 router.get("/ordered",async(req,res)=>{

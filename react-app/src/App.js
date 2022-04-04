@@ -8,6 +8,7 @@ import Productinfo from './pages/Productinfo';
 import Cartpage from './pages/Cartpage';
 import Adminpage from './pages/Adminpage';
 import Ordered from './pages/Ordered';
+import Returned from './pages/Returned';
 import './stylesheets/Layout.css'
 import './stylesheets/products.css'
 import './stylesheets/Admin.css'
@@ -24,6 +25,7 @@ function App() {
               <Route path='/cart' exact element={<Cartpage />} />
               <Route path='/admin' exact element={<Adminpage/>} />
               <Route path='/admin/orders' exact element={<Ordered/>} />
+              <Route path='/admin/returns' exact element={<Returned/>} />
               
           </Routes>
       </BrowserRouter>

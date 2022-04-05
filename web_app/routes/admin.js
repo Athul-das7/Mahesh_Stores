@@ -64,9 +64,21 @@ router.get("/ordered",async(req,res)=>{
         .get();
     var arr= new Array();
     ordered.forEach(doc=>{
+        const data = doc.data()
         const obj = {
             id : doc.id,
-            ...doc.data()
+            cartComponents: data.cartComponents,
+            components: data.components,
+            returnDate: data.returnDate,
+            startDate: data.startDate,
+            status: data.status,
+            endDate: data.endDate,
+            user: { 
+                email: data.user.email,
+                name: data.user.name,
+                phone: data.user.phone,
+                rollNo: data.user.rollNo
+            }
         }
         arr.push(obj);
     })
@@ -81,9 +93,21 @@ router.get("/returned",async(req,res)=>{
     var arr = new Array();
     console.log(returned)
     returned.forEach(doc=>{
+        const data = doc.data()
         const obj = {
             id : doc.id,
-            ...doc.data()
+            cartComponents: data.cartComponents,
+            components: data.components,
+            returnDate: data.returnDate,
+            startDate: data.startDate,
+            status: data.status,
+            user: { 
+                email: data.user.email,
+                name: data.user.name,
+                phone: data.user.phone,
+                rollNo: data.user.rollNo
+            },
+            endDate: data.endDate
         }
         arr.push(obj);
     })

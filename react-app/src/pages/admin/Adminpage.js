@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import {useNavigate} from 'react-router-dom'
-import Layout from '../components/Admin'
+import Layout from '../../components/Admin'
 import Alert from './Alert'
 import axios from 'axios'
 

@@ -2,7 +2,7 @@ const { application } = require('express')
 var express=require('express')
 const { isRequired } = require('nodemon/lib/utils')
 var router = express.Router()
-const db = require('../database')
+// const db = require('../database')
 
 
 router.get('/',async(req,res)=>{

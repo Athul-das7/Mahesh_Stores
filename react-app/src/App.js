@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React from 'react';
 import './App.css';
 import Homepage from './pages/Homepage';
 import {Route , BrowserRouter , Routes} from 'react-router-dom';
@@ -6,8 +6,12 @@ import Logininfo from './pages/Loginpage';
 import Registerpage from './pages/Registerpage';
 import Productinfo from './pages/Productinfo';
 import Cartpage from './pages/Cartpage';
-import './stylesheets/Layout.css'
+import Adminpage from './pages/Adminpage';
+import Ordered from './pages/Ordered';
+import Returned from './pages/Returned';
+// import './stylesheets/Layout.css'
 import './stylesheets/products.css'
+import './stylesheets/Admin.css'
 function App() {
   return (
     <div className="App">
@@ -19,6 +23,9 @@ function App() {
               <Route path='/register' exact element={<Registerpage />} />
               <Route path='/productinfo/:productid' exact element={<Productinfo />} />
               <Route path='/cart' exact element={<Cartpage />} />
+              <Route path='/admin' exact element={<Adminpage/>} />
+              <Route path='/admin/orders' exact element={<Ordered/>} />
+              <Route path='/admin/returns' exact element={<Returned/>} />
               
           </Routes>
       </BrowserRouter>

@@ -5,6 +5,8 @@ const session = require('express-session');
 const { v4: uuidv4 } = require("uuid");
 const { check, validationResult } = require('express-validator')
 // const helmet = require('helmet')
+var cors = require('cors')
+
 
 const admin = require('./routes/admin');
 
@@ -15,10 +17,11 @@ var moment = require('moment');
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.locals.moment = require('moment');
 
+app.use(cors()) // Use this after the variable declaration
 // view engine
 app.set('views','./views') //express.static(path.join(__dirname, 'views')))
 app.set('view engine', 'ejs');
@@ -59,6 +62,6 @@ app.use('/', home);
 // })
 
 app.listen(port,(req,res)=>{
-    console.log('listening at http://localhost:3000');
+    console.log(`Listening at http://localhost:${port}`);
 })
  

@@ -5,15 +5,9 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import fireDB from '../fireconfig';
 import { fireproducts } from '../mahesh_stores-products';
 import {useNavigate} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
-
 function Homepage() {
 
-  const [products,setproducts]=useState([]);
-
   const [searchkey , setSearchkey]=useState([]);
-  const dispatch = useDispatch();
-  const {cartItems} = useSelector(state=>state.cartReducer);
   const[filterType, setFilterType]=useState([]);
   // async function adddata(){
   //   try{
@@ -22,8 +16,8 @@ function Homepage() {
   //     console.log(error)
   //   }
   // }
- 
-    const navigate=useNavigate();
+    const [products,setproducts]=useState([]);
+    const navigate=useNavigate()
     useEffect(() => {
       getdata()
     },[])
@@ -61,15 +55,6 @@ function Homepage() {
      //<button onClick={addProductsData}>add data to FB</button> -->keep it Layout if needed to add components
       //<button onClick={adddata}>add data to fire base</button>
       //    <button onClick={getdata}>get data from DB</button>
-
-
-       useEffect(()=>{
-         localStorage.setItem('cartItems', JSON.stringify(cartItems));
-       })
-      const addToCart=(product)=>{
-         
-        dispatch({type: "ADD_TO_CART", payload: product});
-      }
   return (
         <Layout>
             <div className="container">
@@ -111,7 +96,7 @@ function Homepage() {
                               </div>
                               <div className='product-actions'>
                                   <div className="d-flex">
-                                      <button className='mx-2' onClick={()=>addToCart(product)}>ADD TO CART</button>
+                                      <button className='mx-2'>ADD TO CART</button>
                                       <button onClick={() => {
                                         navigate(`/productinfo/${product.id}`)
                                       }}>DESCRIPTION</button>

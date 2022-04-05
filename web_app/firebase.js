@@ -18,18 +18,15 @@ const db = new Firestore({
 
 // test()
 
-db.collection('users').get('1602-19-735-071').then(q=>{
-  q.forEach(doc=>{
-    console.log(doc.data())
-    db.doc(`users/${doc.id}`).update({
-    'number':986696234,
-    'test':'helloooo'
-    })
-  })
-  // q.update({
-  //   'test':'heloo'
-  // })
-})
+// db.collection('users').get('1602-19-735-071').then(q=>{
+//   q.forEach(doc=>{
+//     console.log(doc.data())
+//     db.doc(`users/${doc.id}`).update({
+//     'number':986696234,
+//     'test':'helloooo'
+//     })
+//   })
+// })
 
 // const batch = writeBatch(db);
 // const sref = doc(db,'name','Athul*');
@@ -37,4 +34,4 @@ db.collection('users').get('1602-19-735-071').then(q=>{
 //   'test':200
 // })
 
-// module.exports = db;
+module.exports = db;

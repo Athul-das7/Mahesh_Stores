@@ -35,7 +35,7 @@ function HomeLayout(props) {
                     </ul>
                     <ul class="nav navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">
+                            <a class="nav-link" href="/admin">
                                 <span class="glyphicon glyphicon-log-in">Admin</span>
                             </a>
                         </li>

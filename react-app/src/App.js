@@ -9,7 +9,7 @@ import Cartpage from './pages/Cartpage';
 import Adminpage from './pages/admin/Adminpage';
 import Ordered from './pages/admin/Ordered';
 import Returned from './pages/admin/Returned';
-// import './stylesheets/Layout.css'
+import './stylesheets/Layout.css'
 import MaheshStoresHome from './pages/MaheshStoreHome';
 import './stylesheets/Layout.css'
 import './stylesheets/products.css'

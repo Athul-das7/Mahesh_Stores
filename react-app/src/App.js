@@ -9,7 +9,7 @@ import Cartpage from './pages/Cartpage';
 import Adminpage from './pages/Adminpage';
 import Ordered from './pages/Ordered';
 import Returned from './pages/Returned';
-import './stylesheets/Layout.css'
+// import './stylesheets/Layout.css'
 import './stylesheets/products.css'
 import './stylesheets/Admin.css'
 function App() {

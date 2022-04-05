@@ -37,3 +37,7 @@
     color: white !important;
     font-weight: bold !important;
 }
+
+.pad {
+    padding-top: 2rem;
+}

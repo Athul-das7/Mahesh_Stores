@@ -21,7 +21,7 @@ router.post('/login',[
     const errors = validationResult(req)
     // console.log(errors);
     if (!errors.isEmpty()){
-        res.render('login',{incorrect:"Minimum 4 characters"})
+        res.json(false)
     }
     var user=false;
     const results = await db.collection('admins')
@@ -29,43 +29,33 @@ router.post('/login',[
     .where('email','==',req.body.email).get()
     results.forEach(doc=>{
         const fields = doc.data();
-        // console.log(doc.id,'=>',doc.data());
         if ( fields.password == req.body.password ) user=true;
     })
-    // console.log(user)
 
     req.session.user = req.body.email
     res.json(user);
-    // res.redirect('/admin/ordered')
-    // if ( user ) {
-    //     req.session.user = req.body.email
-    //     res.redirect('/admin/ordered')
-    // }
-    // else {
-    //     res.render('login',{incorrect:"Incorrect username or password"})
-    // }
 })
 
 // logout route 
-router.get('/logout',(req,res)=>{
-    req.session.destroy(function(err){
-        if (err){
-            console.log(err)
-            res.send(err)
-        }
-        else {
-            res.redirect('/')
-        }
-    })
-})
+// router.get('/logout',(req,res)=>{
+//     req.session.destroy(function(err){
+//         if (err){
+//             console.log(err)
+//             res.send(err)
+//         }
+//         else {
+//             res.redirect('/')
+//         }
+//     })
+// })
 
 // middleware to check user authentication
-router.use((req,res,next)=>{
-    if( !req.session.user ){
-        res.render('login',{incorrect:"Unauthorized user"})
-    }
-    else next()
-})
+// router.use((req,res,next)=>{
+//     if( !req.session.user ){
+//         res.render('login',{incorrect:"Unauthorized user"})
+//     }
+//     else next()
+// })
 
 // order page 
 router.get("/ordered",async(req,res)=>{
@@ -74,17 +64,12 @@ router.get("/ordered",async(req,res)=>{
         .get();
     var arr= new Array();
     ordered.forEach(doc=>{
-        // console.log('entered')
-        // console.log(doc.data());
         const obj = {
             id : doc.id,
             ...doc.data()
         }
         arr.push(obj);
-        // console.log(obj);
-        // console.log(arr);
     })
-    // res.render("ordered",{user:req.session.user, orders:arr})
     res.json(arr)
 })
 
@@ -93,9 +78,6 @@ router.get("/returned",async(req,res)=>{
     var returned = await db.collection('transactions')
                         .where('status','==',1)
                         .get();
-    // returned = await returned.where('return-date','==',null);
-    // returned = await returned.where('components','!=',null)
-    // returned = await returned.orderBy('start-date').get();
     var arr = new Array();
     console.log(returned)
     returned.forEach(doc=>{
@@ -106,61 +88,28 @@ router.get("/returned",async(req,res)=>{
         arr.push(obj);
     })
     console.log( moment().format('DD/MM/YYYY'));
-    // res.render("returned",{user:req.session.user, returns:arr})
     res.json(arr);
 })
 
 router.post('/returned', async(req,res)=>{
-    db.collection('users').get('1602-19-735-071').then(q=>{
-    q.forEach(doc=>{
-        console.log(doc.data())
-        db.doc(`users/${doc.id}`).update({
-        'number':986696234,
-        'test':'helloooo'
-        })
+    console.log(req.body.id)
+    db.doc(`transactions/${req.body.id}`).update({
+        returnDate: new Date(),
+        status: 2,
+        // learnt: 3, 
     })
-    })
-    let sql =`Select cart_Id from Transactions where transId = ?`
-    const cartId = await db.promise().query(sql,[req.body.transId])
 
-    sql =`update Transactions 
-    Set returnDate=?
-    where transId=?`
-    const updateuser = await db.promise().query(sql,[moment().format('DD/MM/YYYY'),req.body.transId])
-
-    sql =`update Cart 
-    Set returned=true
-    where cartId=?`
-    const transId = await db.promise().query(sql,[cartId[0][0][0]])
-
+    // res.json(true )
     res.redirect('/admin/returned')
 })
 
 router.post('/ordered/', async(req,res)=>{
+    db.doc(`transactions/${req.body.id}`).update({
+        components: req.components,
+        status: 1
+    })
 
-    arr=req.body.compList
-    let reload=false
-    for (let i = 0; i < arr.length; i++) {
-        if ( arr[i].length == 0 )  reload = true;
-    }
-    if ( reload ) res.redirect('/admin/ordered')
-    else {
-        let sql =`Select cart_Id from Transactions where transId = ?`
-        const cartId = await db.promise().query(sql,[req.body.transId])
-
-        sql =`update Transactions 
-        Set compList=?
-        where transId=?`
-
-        const updateuser = await db.promise().query(sql,[req.body.compList.toString(),req.body.transId])
-
-        sql =`update Cart 
-        Set given=true
-        where cartId=?`
-        const transId = await db.promise().query(sql,[cartId[0][0][0]])
-
-        res.redirect('/admin/ordered')
-    }
+    res.redirect('/admin/ordered')
 })
 
 router.get("/history",async(req,res)=>{
@@ -175,7 +124,4 @@ router.get("/history",async(req,res)=>{
     res.render("history",{user:req.session.user, currentD:currentD[0]})
 })
 
-
-
 module.exports = router
-

@@ -14,7 +14,7 @@ function Rows(props) {
   ));
 
   return (
-    <Container size='xl'>
+    <Container size='xl' className='pad'>
     <Table>
       <thead>
         <tr>

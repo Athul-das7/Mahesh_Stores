@@ -1,4 +1,6 @@
-Admin page:
+### Todo's
+
+##Admin page:
 
 ~~Status while wrong login~~
 
@@ -12,7 +14,7 @@ Setting helmet for express server
 
 OTP verification for order
 
-General:
+##General:
 
 Creating logs and statistics for the websits 
 

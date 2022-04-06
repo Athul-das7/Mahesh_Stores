@@ -1,10 +1,8 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-// import {useHistory} from 'react-router-dom'
 import AdminLayout from '../../components/adminLayout'
 import Rows from './Rows'
-// import { Route, Redirect } from 'react-router'
 
 
 function Ordered(props) {
@@ -25,17 +23,14 @@ function Ordered(props) {
     console.log(page);
   }
 
-  console.log(props.auth);
-  function test(){
-    // history.push('/')
-    navigate('/admin',{state:{id:1}})
-  }
+  // console.log(props.auth);
 
   // if ( props.auth === true ){
     return (
         <AdminLayout>
-          <button onClick={test}>orders</button>
-          <button onClick={() => setPage('returned')}>returns</button>
+          <h1 className="title-order">Order List</h1>
+          {/* <button onClick={test}>orders</button>
+          <button onClick={() => setPage('returned')}>returns</button> */}
           <Rows elements={datas}></Rows>
         </AdminLayout>
     )

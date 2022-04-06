@@ -31,6 +31,7 @@ function App() {
               <Route path='/admin/orders' exact element={<Ordered/>} />
               <Route path='/admin/returns' exact element={<Returned/>} />
               <Route path='/maheshstores' exact element={<MaheshStoresHome/>} />
+              <Route path='/cart' exact element={<Cartpage/>} />
               
           </Routes>
       </BrowserRouter>

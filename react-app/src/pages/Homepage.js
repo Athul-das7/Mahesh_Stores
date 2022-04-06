@@ -101,7 +101,9 @@ function Homepage() {
                               </div>
                               <div className='product-actions'>
                                   <div className="d-flex">
-                                      <button className='mx-2'>ADD TO CART</button>
+                                      <button onClick={()=>{
+                                        navigate('/cart')
+                                      }} className='mx-2'>ADD TO CART</button>
                                       <button onClick={() => {
                                         navigate(`/productinfo/${product.id}`)
                                       }}>DESCRIPTION</button>

@@ -5,10 +5,12 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import fireDB from '../fireconfig';
 import { fireproducts } from '../mahesh_stores-products';
 import {useNavigate} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 function Homepage() {
 
   const [searchkey , setSearchkey]=useState([]);
   const[filterType, setFilterType]=useState([]);
+  const location = useLocation();
   // async function adddata(){
   //   try{
   //     await addDoc(collection(fireDB, "users"),{name:'greshu',age:18})
@@ -16,6 +18,9 @@ function Homepage() {
   //     console.log(error)
   //   }
   // }
+  // console.log(location.state.start, location.state.end);
+  const {start,end} = location.state
+  console.log(start, end);
     const [products,setproducts]=useState([]);
     const navigate=useNavigate()
     useEffect(() => {
@@ -59,8 +64,8 @@ function Homepage() {
         <Layout>
             <div className="container">
                 <div className='d-flex justify-content-evenly m-2'>
-                          <div >Starting Date:9/1/22</div>
-                          <div >Ending Date:19/1/22</div>
+                          <div >Starting Date:{start.getDate()}/{start.getMonth()}/{start.getFullYear().toString()}</div>
+                          <div >End Date:{end.getDate()}/{end.getMonth()}/{end.getFullYear().toString()}</div>
                 </div>
                 <div className='d-flex w-50 justify-content-evenly'>
                   <input type="text" 

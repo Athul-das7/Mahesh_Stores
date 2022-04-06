@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { FaBorderNone } from 'react-icons/fa'
-
+import {useNavigate} from 'react-router-dom'
 import HomeLayout from '../components/HomeLayout'
 // import HModal from '../components/HModal'
 import { DatePicker } from '@mantine/dates';
@@ -15,11 +15,14 @@ import ModalTitle from 'react-bootstrap/ModalTitle';
 function MaheshStoreHome() {
 const initialDate = dayjs(new Date()).toDate();
 const [value1, setValue1] = useState(initialDate);
-
+const navigate = useNavigate()
 const [value2, setValue2] = useState();
 const [openmodal, setOpenModal] = useState(false);
 const handleopen = () => setOpenModal(true);
 const handleclose= () => setOpenModal(false);
+function sendValue() {
+  navigate('/',{state:{start:value1,end:value2}})
+}
   return (
     <HomeLayout>
         <header class="page-header big-banner">
@@ -29,7 +32,7 @@ const handleclose= () => setOpenModal(false);
                   <h1 >Check Abailability</h1>
                 </div>
                 <div class="col-md-6">
-                  <form action="/home/api" method="get">
+                  <form onSubmit={sendValue}>
                     <div class="container availbox contactform">
                         <div className="area1 arrow">
                           <label for="catname"><span type='button' onClick={handleopen} >Category of Components</span></label>
@@ -48,7 +51,7 @@ const handleclose= () => setOpenModal(false);
                         </div>
 
                         <div class="area2">
-                            <form class="align-items-center" >
+                            <form class="align-items-center" onSubmit={sendValue} >
                               <div class='parent'>
                                 <div class='child'>
                                   <DatePicker id='startdate' clearable={false} placeholder="Start Date" 
@@ -87,7 +90,7 @@ const handleclose= () => setOpenModal(false);
 
                         <div class="area3">
                             <div class="col-md-12 col-12 col-sm-12" style={{margin: 0, border: 0,  textAlign: 'center', padding: 0}}>                                        
-                            <button type="submit" class="btn btn-success btn-block pad" id="submitbtn">
+                            <button  type="submit" class="btn btn-success btn-block pad" id="submitbtn">
                                 Submit</button>
                             </div>
                         </div>

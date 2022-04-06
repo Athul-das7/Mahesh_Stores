@@ -2,12 +2,14 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import {useNavigate} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 import Layout from '../../components/Admin'
 import Alert from './Alert'
 import axios from 'axios'
 
 function Adminpage(props) {
     const navigate = useNavigate()
+    const location = useLocation()
     const [status,setStatus] = useState(()=>{ 
         if ( props.status === undefined || props.status === -1 )
         return -1 
@@ -18,7 +20,7 @@ function Adminpage(props) {
     const passwordField = useRef()
     // var status = props.status;
     // status = props.status
-    console.log('props',props.value)
+    console.log('props',location.state.id)
     // console.log(emailField.current.value)
     // console.log(test)
 

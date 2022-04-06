@@ -1,8 +1,8 @@
 const Firestore = require('@google-cloud/firestore');
 
 const db = new Firestore({
-  projectId: 'mahesh-stores',
-  keyFilename: './maheshstores.json',
+  projectId: 'mahesh-dev',
+  keyFilename: './mahesh-dev.json',
 });
 
 // const test = async() =>{

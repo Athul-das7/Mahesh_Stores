@@ -26,8 +26,8 @@ function Homepage() {
   //     console.log(error)
   //   }
   // }
-    const {start,end} = location.state
-    console.log(start, end);
+    const {start,end, category} = location.state
+    console.log(start, end, category);
     const navigate=useNavigate();
     useEffect(() => {
       getdata()

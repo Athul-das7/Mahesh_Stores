@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { FaBorderNone } from 'react-icons/fa'
 import {useNavigate} from 'react-router-dom'
 import HomeLayout from '../components/HomeLayout'
@@ -19,9 +19,20 @@ const navigate = useNavigate()
 const [value2, setValue2] = useState();
 const [openmodal, setOpenModal] = useState(false);
 const handleopen = () => setOpenModal(true);
-const handleclose= () => setOpenModal(false);
+const handleclose= () => {
+  setOpenModal(false);
+}
+const [category, setCategory] = useState('');
+const inputRef = useRef()
+function getCategory(e) {
+  // console.log(e.target.innerText)
+  setCategory(e.target.innerText)
+  handleclose()
+  // console.log(category)
+}
 function sendValue() {
-  navigate('/',{state:{start:value1,end:value2}})
+  navigate('/',{state:{start:value1,end:value2,category:category}})
+  setCategory('')
 }
   return (
     <HomeLayout>
@@ -41,13 +52,13 @@ function sendValue() {
                               <Modal.Title>Select Category</Modal.Title>
                             </Modal.Header>
                             <Modal.Body id="catselect">
-                              <div class="box btn categoryBox" role="button"  aria-pressed="false" tabindex="1" id="Embeded">
+                              <div class="box btn categoryBox" role="button" onClick={getCategory} aria-pressed="false" tabindex="1" id="Embeded">
                                 <h2>category</h2>
                               </div>
 
                             </Modal.Body>
                           </Modal>
-                          <input type='text' autoComplete='off' id='catname' name='catname' value="" maxLength={15}></input>
+                          <input value={category} onChange={setCategory} type='text' autoComplete='off' id='catname' name='catname'  maxLength={15}></input>
                         </div>
 
                         <div class="area2">

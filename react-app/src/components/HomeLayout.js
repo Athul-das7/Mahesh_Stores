@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from './Footer'
 import{BiLogIn} from 'react-icons/fa'
-
+import {Link} from 'react-router-dom';
 function HomeLayout(props) {
   return (
     <div className='header'>
@@ -35,9 +35,10 @@ function HomeLayout(props) {
                     </ul>
                     <ul class="nav navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin">
+                        <Link className="nav-link" to="/admin" state={{status:-1}}>Admin</Link>
+                            {/* <a class="nav-link" href="/admin">
                                 <span class="glyphicon glyphicon-log-in">Admin</span>
-                            </a>
+                            </a> */}
                         </li>
                     </ul>
                 </div>

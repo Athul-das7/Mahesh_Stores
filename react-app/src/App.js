@@ -16,9 +16,15 @@ import './stylesheets/products.css'
 import './stylesheets/Admin.css'
 import './stylesheets/home.css'
 import './stylesheets/homemodal.css'
+import {Provider} from 'react-redux'
+
+
 function App() {
+  
   return (
+     
     <div className="App">
+     
         <BrowserRouter>
           <Routes>
               
@@ -31,11 +37,13 @@ function App() {
               <Route path='/admin/orders' exact element={<Ordered/>} />
               <Route path='/admin/returns' exact element={<Returned/>} />
               <Route path='/maheshstores' exact element={<MaheshStoresHome/>} />
-              <Route path='/cart' exact element={<Cartpage/>} />
+              
+              
+              
               
           </Routes>
       </BrowserRouter>
-
+     
     </div>
   );
 }

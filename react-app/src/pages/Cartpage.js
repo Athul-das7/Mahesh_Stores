@@ -1,8 +1,7 @@
 import React from 'react'
-import { FaTrash } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import Layout from '../components/Layout'
-
+import { FaBeer } from 'react-icons/fa';
 
 function Cartpage() {
 
@@ -14,21 +13,22 @@ function Cartpage() {
 
          <thread>
          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>action</th>
+            
           </tr> 
          </thread>
 
          <tbody>
-           
+           <th>Image</th>
+            <th>Name</th>
+            <th>delete</th>
            {cartItems.map(item=>{
           
           return <tr>
+            
           <td><img src={item.imageURL} height="40" width="40"/></td>
           <td>{item.name}</td>
-          <td>{FaTrash}</td>
+          <td><FaBeer /></td>
+          
           </tr>
 
            }

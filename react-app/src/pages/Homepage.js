@@ -11,13 +11,15 @@ import {useLocation} from 'react-router-dom';
 
 function Homepage() {
 
+  const location = useLocation();
+  const {start,end, category} = location.state
+  console.log(start, end, category);
   const [products,setproducts]=useState([]);
 
   const [searchkey , setSearchkey]=useState([]);
   const dispatch = useDispatch();
   const {cartItems} = useSelector(state=>state.cartReducer);
-  const[filterType, setFilterType]=useState([]);
-  const location = useLocation();
+  const[filterType, setFilterType]=useState(category);
 
   // async function adddata(){
   //   try{
@@ -26,8 +28,6 @@ function Homepage() {
   //     console.log(error)
   //   }
   // }
-    const {start,end, category} = location.state
-    console.log(start, end, category);
     const navigate=useNavigate();
     useEffect(() => {
       getdata()

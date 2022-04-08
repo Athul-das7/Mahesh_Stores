@@ -53,15 +53,15 @@ function sendValue() {
                             </Modal.Header>
                             <Modal.Body id="catselect">
                               <div class="box btn categoryBox" role="button" onClick={getCategory} aria-pressed="false" tabindex="1" id="Embeded">
-                                <h2>Sensors</h2>
+                                <h2>sensors</h2>
                               </div>
 
                               <div class="box btn categoryBox" role="button" onClick={getCategory} aria-pressed="false" tabindex="1" id="Embeded">
-                                  <h2>Embedded</h2>
+                                  <h2>embedded</h2>
                               </div>
 
                               <div class="box btn categoryBox" role="button" onClick={getCategory} aria-pressed="false" tabindex="1" id="Embeded">
-                                <h2>General</h2>
+                                <h2>general</h2>
                               </div>
 
                               

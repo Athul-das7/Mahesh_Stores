@@ -53,12 +53,22 @@ function sendValue() {
                             </Modal.Header>
                             <Modal.Body id="catselect">
                               <div class="box btn categoryBox" role="button" onClick={getCategory} aria-pressed="false" tabindex="1" id="Embeded">
-                                <h2>category</h2>
+                                <h2>Sensors</h2>
                               </div>
+
+                              <div class="box btn categoryBox" role="button" onClick={getCategory} aria-pressed="false" tabindex="1" id="Embeded">
+                                  <h2>Embedded</h2>
+                              </div>
+
+                              <div class="box btn categoryBox" role="button" onClick={getCategory} aria-pressed="false" tabindex="1" id="Embeded">
+                                <h2>General</h2>
+                              </div>
+
+                              
 
                             </Modal.Body>
                           </Modal>
-                          <input value={category} onChange={setCategory} type='text' autoComplete='off' id='catname' name='catname'  maxLength={15}></input>
+                          <input ref={inputRef} value={category} onChange={setCategory} type='text' autoComplete='off' id='catname' name='catname'  maxLength={15}></input>
                         </div>
 
                         <div class="area2">

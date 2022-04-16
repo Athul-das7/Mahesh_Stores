@@ -13,27 +13,33 @@ router.get('/login', async (req,res)=>{
 })
 
 // login post 
-router.post('/login',[
-    check('password','this field must atleast be 4 characters')
-    .exists().isLength({min:4})
-], async (req,res)=>{
-    console.log(req.body)
-    const errors = validationResult(req)
-    // console.log(errors);
-    if (!errors.isEmpty()){
-        res.json(false)
-    }
-    var user=false;
-    const results = await db.collection('admins')
-    .where('password','==',req.body.password)
-    .where('email','==',req.body.email).get()
-    results.forEach(doc=>{
-        const fields = doc.data();
-        if ( fields.password == req.body.password ) user=true;
-    })
+router.post('/login', async (req,res)=>{
+    console.log('changed', req.body)
 
-    req.session.user = req.body.email
-    res.json(user);
+// [ //validator for express 
+//     check('password','this field must atleast be 4 characters')
+//     .exists().isLength({min:4})
+// ],
+    // const errors = validationResult(req)
+    // // console.log(errors);
+    // if (!errors.isEmpty()){
+    //     res.json(false)
+    // }
+    var users={'YchIH9j4mGXqO0SAJGcI4LWF9To1':true,'7yzuiNcOd7Upi0ae6aQ1558qOfi2':true};
+    var result = false;
+    if ( req.body.uid in users ) {
+        result = true;
+    }
+    // const results = await db.collection('admins')
+    // .where('password','==',req.body.password)
+    // .where('email','==',req.body.email).get()
+    // results.forEach(doc=>{
+        // const fields = doc.data();
+        // if ( fields.password == req.body.password ) user=true;
+    // })
+
+    // req.session.user = req.body.email
+    res.json(result);
 })
 
 // logout route 

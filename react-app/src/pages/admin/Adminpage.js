@@ -5,61 +5,103 @@ import {useNavigate} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
 import Layout from '../../components/Admin'
 import Alert from './Alert'
+import {useAuth} from '../../contexts/AuthContext'
 import axios from 'axios'
 
 function Adminpage(props) {
     const navigate = useNavigate()
     const location = useLocation()
+    const authentication = useAuth()
+    // console.log('hey yah', authentication.currentUser.uid)
     const [status,setStatus] = useState(()=>{ 
         if ( props.status === undefined || props.status === -1 )
         return -1 
         else return props.status
     });
-    const [auth,setAuth] = useState(false)
+    // if ( location.state && location.state.status ){
+    //  setStatus(location.state.status)
+    // }
+    // const [auth,setAuth] = useState(false)
     const emailField = useRef()
     const passwordField = useRef()
     // var status = props.status;
     // status = props.status
-    console.log('props',location.state.id)
+    // console.log('props',location.state.id)
     // console.log(emailField.current.value)
     // console.log(test)
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
         const email = emailField.current.value
         const password = passwordField.current.value
-        const user = {
-            email: email,
-            password: password
-        }
-        console.log(user)
-        // alert(password)
-        let axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                "Access-Control-Allow-Origin": "*",
-                }
-            };
-        axios.post('http://localhost:5000/admin/login',user,axiosConfig)
-            .then(res=>{
-                // alert('login success')
-                console.log('data',res.data)
-                if ( res.data === true ) {
-                    setAuth(true)
-                    navigate(`/admin/orders`,{auth:auth})
-                }
-                else{
-                    // navigate(`/admin`,{status:0})
-                    setStatus(0);
-                }
+        try{
+            await authentication.login(email, password)
+            const user = await authentication.login(email, password)
+            console.log('wow')
+            // const a = await authentication.check()
+            // console.log("wonderful",authentication.currentUser.uid)
+            let axiosConfig = {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    "Access-Control-Allow-Origin": "*",
+                    }
+                };
+            axios.post('http://localhost:5000/admin/login',{uid:authentication.currentUser.uid},axiosConfig)
+                .then(res=>{
+                    // alert('login success')
+                    console.log('data',res.data)
+                    if ( res.data === true ) {
+                        // setAuth(true)
+                        navigate(`/admin/orders`,{state:{user:authentication.currentUser.uid}})
+                    }
+                    else{
+                        // navigate(`/admin`,{status:0})
+                        setStatus(0);
+                    }
 
-            })
-            .catch(err=>{
-                console.log(err)
-            })
-        // emailField.current.value = null
-        // passwordField.current.value = null
-        console.log(user)
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+        }
+        catch{
+            setStatus(0);
+        }
+        // console.log(authentication.currentUser.uid);
+        // const user = {
+        //     email: email,
+        //     password: password
+        // }
+
+        // console.log(user)
+        // alert(password)
+
+        // let axiosConfig = {
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=UTF-8',
+        //         "Access-Control-Allow-Origin": "*",
+        //         }
+        //     };
+        // axios.post('http://localhost:5000/admin/login',user,axiosConfig)
+        //     .then(res=>{
+        //         // alert('login success')
+        //         console.log('data',res.data)
+        //         if ( res.data === true ) {
+        //             setAuth(true)
+        //             navigate(`/admin/orders`,{auth:auth})
+        //         }
+        //         else{
+        //             // navigate(`/admin`,{status:0})
+        //             setStatus(0);
+        //         }
+
+        //     })
+        //     .catch(err=>{
+        //         console.log(err)
+        //     })
+        emailField.current.value = null
+        passwordField.current.value = null
+        // console.log(user)
         // alert(password)
     }
 

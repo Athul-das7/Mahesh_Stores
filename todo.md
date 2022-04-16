@@ -1,10 +1,10 @@
 ### Todo's
 
-##Admin page:
+## Admin page:
 
 ~~Status while wrong login~~
 
-Status 0 not given, 1 not returned, 3 transcation compelete
+~~Status 0 not given, 1 not returned, 3 transcation compelete~~
 
 Blocking unauthorized users to access the certain api routes
 
@@ -14,7 +14,13 @@ Setting helmet for express server
 
 OTP verification for order
 
-##General:
+The authentication takes twice to get authenticated
+
+The credentials are not correctly being reflected
+
+For every 24 hours signout all the devices
+
+## General:
 
 Creating logs and statistics for the websits 
 

@@ -1,12 +1,23 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 import AdminLayout from '../../components/adminLayout'
 import Rows from './Rows'
 
 
 function Ordered(props) {
+  const location = useLocation()
   const navigate = useNavigate()
+  // console.log('location',location.state.user)
+  // try{
+  //   if ( location.state === undefined || location.state.user === undefined ) {
+  //     navigate(`/admin`,{state:{status:1}})
+  //   }
+  // }
+  // catch{
+  //     navigate(`/admin`,{state:{status:1}})
+  // }
   // const history = useHistory()
   const [page, setPage] = useState('ordered')
   // console.log(page);
@@ -14,7 +25,7 @@ function Ordered(props) {
 
   useEffect(()=>{ 
     getData(page);
-  },[page])
+  },[])
 
   function getData (data){
     fetch(`http://localhost:5000/admin/${data}`)

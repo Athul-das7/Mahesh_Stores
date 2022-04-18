@@ -19,15 +19,16 @@ import {auth} from '../fireconfig'
 export function Authvalue(){
   const [currentUser, setCurrentUser] = useState()
 
-  useEffect(() => {
-    // function check(){
+    function checkUser(){
       const unsubscribe = auth.onAuthStateChanged(user => {
+        console.log('user',user.uid)
         setCurrentUser(user)
         // setLoading(false)
       })
+      console.log('unsub',unsubscribe.uid)
       return unsubscribe
-    // }
-  }, [currentUser])
+
+    }
 
 
   function login(email,password) {
@@ -39,5 +40,5 @@ export function Authvalue(){
     return signOut(auth)
   }
 
-  return {working:'working',currentUser,login,logout}
+  return {working:'working',currentUser, setCurrentUser,login,logout,checkUser}
 }

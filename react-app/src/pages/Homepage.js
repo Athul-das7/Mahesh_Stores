@@ -12,6 +12,7 @@ import {useLocation} from 'react-router-dom';
 function Homepage() {
 
   const location = useLocation();
+  console.log("location state",location.state);
   const {start,end, category} = location.state
   console.log(start, end, category);
   const [products,setproducts]=useState([]);

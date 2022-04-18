@@ -8,16 +8,22 @@ import Alert from './Alert'
 import {useAuth} from '../../contexts/AuthContext'
 import axios from 'axios'
 
-function Adminpage(props) {
+function Adminpage() {
     const navigate = useNavigate()
     const location = useLocation()
     const authentication = useAuth()
     // console.log('hey yah', authentication.currentUser.uid)
     const [status,setStatus] = useState(()=>{ 
-        if ( props.status === undefined || props.status === -1 )
+        // if ( props.status === undefined || props.status === -1 )
+        if ( location.state === null || location.state.status === null )
         return -1 
-        else return props.status
+        else return location.state.status
     });
+
+    useEffect(()=>{
+        authentication.checkUser()
+    },[])
+    // console.log('hey yah', authentication.currentUser.uid)
     // if ( location.state && location.state.status ){
     //  setStatus(location.state.status)
     // }
@@ -36,8 +42,9 @@ function Adminpage(props) {
         const password = passwordField.current.value
         try{
             await authentication.login(email, password)
-            const user = await authentication.login(email, password)
-            console.log('wow')
+            // const user = await authentication.login(email, password)
+            await authentication.checkUser()
+            console.log('wow',authentication.currentUser.uid)
             // const a = await authentication.check()
             // console.log("wonderful",authentication.currentUser.uid)
             let axiosConfig = {
@@ -52,7 +59,7 @@ function Adminpage(props) {
                     console.log('data',res.data)
                     if ( res.data === true ) {
                         // setAuth(true)
-                        navigate(`/admin/orders`,{state:{user:authentication.currentUser.uid}})
+                        navigate(`/admin/orders`)
                     }
                     else{
                         // navigate(`/admin`,{status:0})

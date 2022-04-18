@@ -4,16 +4,18 @@ import {useNavigate} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
 import AdminLayout from '../../components/adminLayout'
 import Rows from './Rows'
+import {useAuth} from '../../contexts/AuthContext'
+import { FaLevelDownAlt } from 'react-icons/fa'
 
 
-function Ordered(props) {
+function Ordered() {
   const location = useLocation()
   const navigate = useNavigate()
   // console.log('location',location.state.user)
   // try{
-  //   if ( location.state === undefined || location.state.user === undefined ) {
-  //     navigate(`/admin`,{state:{status:1}})
-  //   }
+    // if ( location.state === null || location.state.user === null ) {
+    //   navigate(`/admin`,{state:{status:1}})
+    // }
   // }
   // catch{
   //     navigate(`/admin`,{state:{status:1}})
@@ -22,11 +24,19 @@ function Ordered(props) {
   const [page, setPage] = useState('ordered')
   // console.log(page);
   const [datas,setData] = useState([])
+  const authentication = useAuth()
+  console.log('ordered', authentication.currentUser)
 
   useEffect(()=>{ 
-    getData(page);
+    getData(page)
   },[])
 
+  useEffect(()=>{
+    authentication.checkUser()
+  },[authentication.currentUser])
+  
+  const current = authentication.currentUser
+  // console.log('current',current)
   function getData (data){
     fetch(`http://localhost:5000/admin/${data}`)
       .then(response => response.json())
@@ -37,6 +47,14 @@ function Ordered(props) {
   // console.log(props.auth);
 
   // if ( props.auth === true ){
+    if ( current.uid === undefined ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
+    else{
     return (
         <AdminLayout>
           <h1 className="title-order">Order List</h1>
@@ -45,6 +63,7 @@ function Ordered(props) {
           <Rows elements={datas}></Rows>
         </AdminLayout>
     )
+  }
   // }
   // else {
   //   return(

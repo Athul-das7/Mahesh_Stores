@@ -12,8 +12,17 @@ import {useLocation} from 'react-router-dom';
 function Homepage() {
 
   const location = useLocation();
+  const navigate=useNavigate();
   console.log("location state",location.state);
-  const {start,end, category} = location.state
+  
+  try {
+    let {start,end, category} = location.state
+  }
+  catch{
+    navigate('/');
+    // return (<></>)
+  }
+  let {start,end, category} = location.state
   console.log(start, end, category);
   const [products,setproducts]=useState([]);
 
@@ -29,7 +38,6 @@ function Homepage() {
   //     console.log(error)
   //   }
   // }
-    const navigate=useNavigate();
     useEffect(() => {
       getdata()
     },[])

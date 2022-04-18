@@ -35,7 +35,7 @@ function HomeLayout(props) {
                     </ul>
                     <ul class="nav navbar-nav ms-auto">
                         <li class="nav-item">
-                        <Link className="nav-link" to="/admin" state={{status:-1}}>Admin</Link>
+                        <Link className="nav-link" to="/admin">Admin</Link>
                             {/* <a class="nav-link" href="/admin">
                                 <span class="glyphicon glyphicon-log-in">Admin</span>
                             </a> */}

@@ -31,7 +31,7 @@ function getCategory(e) {
   // console.log(category)
 }
 function sendValue() {
-  navigate('/',{state:{start:value1,end:value2,category:category}})
+  navigate('/product',{state:{start:value1,end:value2,category:category}})
   setCategory('')
 }
   return (

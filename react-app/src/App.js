@@ -31,7 +31,8 @@ function App() {
           <AuthProvider>
           <Routes>
               
-              <Route path='/' exact element= {<Homepage />} />
+              <Route path='/' exact element={<MaheshStoresHome/>} />
+              <Route path='/product' exact element= {<Homepage />} />
               <Route path='/login' exact element={<Logininfo />} />
               <Route path='/register' exact element={<Registerpage />} />
               <Route path='/productinfo/:productid' exact element={<Productinfo />} />
@@ -39,7 +40,6 @@ function App() {
               <Route path='/admin' exact element={<Adminpage/>} />
               <Route path='/admin/orders' exact element={<Ordered/>} />
               <Route path='/admin/returns' exact element={<Returned/>} />
-              <Route path='/maheshstores' exact element={<MaheshStoresHome/>} />
               {/* <Route path='/test' exact element={<Test/>} /> */}
               
               

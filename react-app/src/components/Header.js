@@ -16,7 +16,7 @@ function Header() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ml-auto">
                 <li className="nav-item " >
-                    <Link className="nav-link"to="/maheshstores">Home</Link>
+                    <Link className="nav-link"to="/">Home</Link>
                     
                 </li>
                 <li className="nav-item" >
@@ -29,7 +29,7 @@ function Header() {
                     <Link className="nav-link" to="/cart">Cart {cartItems.length}</Link>
                 </li>
                 <li className="nav-item " >
-                    <Link className="nav-link" to="/admin" state={{status:-1}}>Admin</Link>
+                    <Link className="nav-link" to="/admin" >Admin</Link>
                 </li>
                 </ul>
             </div>

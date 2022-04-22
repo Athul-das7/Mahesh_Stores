@@ -31,9 +31,6 @@ function Ordered() {
     getData(page)
   },[])
 
-  useEffect(()=>{
-    authentication.checkUser()
-  },[authentication.currentUser])
   
   const current = authentication.currentUser
   // console.log('current',current)

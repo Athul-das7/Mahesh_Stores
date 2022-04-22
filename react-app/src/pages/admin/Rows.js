@@ -3,12 +3,19 @@ import { Table, Container } from '@mantine/core';
 import { Button, Collapse } from '@mantine/core';
 import { useState } from 'react';
 // import { Button } from 'react-bootstrap'
-import Collapse_comp from './Collapse_comp';
+import CollapseComp from './CollapseComp';
 
 function Rows(props) {
   const elements = props.elements
-  const [opened, setOpen] = useState(false);
+  const [cartdata,setCartdata] = useState([]);
   console.log(elements);
+  function handleClick(){
+    // e.preventDefault()
+    console.log('didn\'t run')
+  }
+  function colData(){
+    console.log('hi')
+  }
   var pos = 0;
   const rows = elements.map((element) => (
     <tr key={element.id}>
@@ -24,11 +31,11 @@ function Rows(props) {
           depressing
         </Collapse> */}
         {console.log(element.cartComponents)}
-      <Collapse_comp cart={element.cartComponents}/>
+      <CollapseComp cart={element.cartComponents} tid={element.id}/>
       </td>
-      <td>
-        <Button>Success</Button>
-      </td>
+      {/* <td>
+        <Button >Success</Button>
+      </td> */}
     </tr>
   ));
 
@@ -41,7 +48,7 @@ function Rows(props) {
           <th>Name</th>
           <th>Phone Number</th>
           <th>Component Details</th>
-          <th>Submit</th>
+          {/* <th>Submit</th> */}
         </tr>
       </thead>
       <tbody>{rows}</tbody>

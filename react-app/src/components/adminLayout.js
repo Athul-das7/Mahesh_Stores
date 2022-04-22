@@ -41,7 +41,7 @@ function adminLayout(props) {
                 </li>
                 <li className="nav-item " >
                     {/* <Link className="nav-link cus-col" to="/admin">History</Link> */}
-                    <Button variant="outline" color="red" onClick={handleLogout}>
+                    <Button variant="outline" color="yellow" onClick={handleLogout}>
                       Logout 
                     </Button>
                 </li>

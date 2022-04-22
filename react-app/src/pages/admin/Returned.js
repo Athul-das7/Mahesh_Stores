@@ -9,7 +9,7 @@ function Returned(props) {
   const [datas,setData] = useState([])
 
   useEffect(()=>{ 
-    fetch(`http://localhost:5000/admin/ordered`)
+    fetch(`http://localhost:5000/admin/returned`)
       .then(response => response.json())
       .then(json=>setData(json))
   }, [page] )

@@ -152,8 +152,8 @@ const handleSubmit = async (v) => {
                                     type="text"
                                     value={details.rollNo}
                                     onChange={handleChange}
-                                    id="roll"
-                                    name="roll" />
+                                    id="rollNo"
+                                    name="rollNo" />
                     </div>
                     <div className='mb-3'>
                       <label className="form-label required">Email</label>

@@ -4,9 +4,70 @@ import { FaBeer } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import React, { Component }  from 'react';
+import db from '../fireconfig';
+import { collection, query, getDocs } from "firebase/firestore";
+import { async } from "@firebase/util";
+import { doc, setDoc,addDoc } from "firebase/firestore";
+import {Navigate, useNavigate} from 'react-router-dom'
+import {useLocation} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+
 
 
 function Cartpage() {
+  const navigate = useNavigate();
+  
+  const [details, setDetails] = useState({
+    name: "",
+    email: "",
+    roll: "",
+    mobile:"",
+});
+
+const st = localStorage.getItem('startDate');
+const end = localStorage.getItem('endDate');
+
+const handleChange = (e) => {
+    setDetails({
+        ...details,
+        [e.target.name]: e.target.value,
+    });
+};
+
+
+
+const handleSubmit = async (v) => {
+  console.log(st);
+    console.log(details);
+   
+    
+    await setDoc(doc(db, "userInfo", details.name), {
+        name: details.name,
+        email: details.email,
+        roll: details.roll,
+        mobile:details.mobile,
+        start_date:st,
+        end_date:end,
+        components:cartItems,
+    });
+
+    
+    setDetails({
+        name: "",
+        email: "",
+        roll: "",
+        mobile:"",
+    });
+
+
+  localStorage.clear();
+  window.alert("Order Placed,confirmation due contact administrator")
+  navigate('../')
+  
+  
+ };
+
+  
 
   const {cartItems} = useSelector(state=>state.cartReducer);
   
@@ -22,6 +83,7 @@ function Cartpage() {
   }
 
   return (
+    
     <Layout>
 
         <table className='table'>
@@ -52,7 +114,65 @@ function Cartpage() {
          </tbody>
           </table>
 
-        <h1>cart</h1>
+        <button type="button" className="btn btn-primary" data-bs-target="#mymodal" data-bs-toggle="modal">submit</button>
+        
+        
+        <div className="modal" id="mymodal">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3 className="modal-title">Details</h3>
+                <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div className="modal-body">
+                  <form>
+                    <div className='mb-3'>
+                      <label className="form-label required">Name</label>
+                      <input
+                                    type="text"
+                                    id="name"
+                                    value={details.name}
+                                    onChange={handleChange}
+                                    name="name" />
+                    </div>
+                    <div className='mb-3'>
+                      <label className="form-label required">roll no</label>
+                      <input
+                                    type="text"
+                                    value={details.roll}
+                                    onChange={handleChange}
+                                    id="roll"
+                                    name="roll" />
+                    </div>
+                    <div className='mb-3'>
+                      <label className="form-label required">Email</label>
+                      <input
+                                    type="email"
+                                    value={details.email}
+                                    onChange={handleChange}
+                                    id="email"
+                                    name="email"/>
+                    </div>
+                    <div className='mb-3'>
+                      <label className="form-label required">Mobile Number</label>
+                      <input
+                                    type="text"
+                                    value={details.mobile}
+                                    onChange={handleChange}
+                                    id="mobile"
+                                    name="mobile"/>
+                    </div>
+                    
+                  </form>
+                  <div className='modal-footer'>
+                      <button type="submit" onClick={handleSubmit} class="btn-btn-primary">Submit</button>
+                      <button type="submit" class="btn-btn-danger">cancel</button>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
     </Layout>
   )

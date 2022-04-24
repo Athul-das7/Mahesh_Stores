@@ -10,6 +10,7 @@ import {useLocation} from 'react-router-dom';
 
 
 function Homepage() {
+  
 
   const location = useLocation();
   const navigate=useNavigate();
@@ -23,7 +24,9 @@ function Homepage() {
     // return (<></>)
   }
   let {start,end, category} = location.state
-  console.log(start, end, category);
+  //console.log(start, end, category);
+  localStorage.setItem('startDate',start.getDate()/start.getMonth()+1/start.getFullYear().toString());
+  localStorage.setItem('endDate',end.getDate()/end.getMonth()+1/end.getFullYear().toString());
   const [products,setproducts]=useState([]);
 
   const [searchkey , setSearchkey]=useState([]);

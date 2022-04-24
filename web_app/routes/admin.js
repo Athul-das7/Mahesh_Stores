@@ -89,6 +89,7 @@ router.get("/ordered",async(req,res)=>{
         arr.push(obj);
     })
     res.json(arr)
+    // res.send('hello')
 })
 
 // returned page 
@@ -129,17 +130,27 @@ router.post('/returned', async(req,res)=>{
         // learnt: 3, 
     })
 
-    // res.json(true )
-    res.redirect('/admin/returned')
+    res.json(true )
+    // res.redirect('/admin/returned')
 })
 
-router.post('/ordered/', async(req,res)=>{
-    db.doc(`transactions/${req.body.id}`).update({
-        components: req.components,
-        status: 1
-    })
+router.post('/ordered', async(req,res)=>{
+    console.log(req.body)
+    try{
+        console.log('enetered')
+        await db.doc(`transactions/${req.body.id}`).update({
+            components: req.components,
+            status: 1
+        })
+        console.log('yes true')
+        res.json(true)
+    }
+    catch{
+        console.log('got error')
+        res.json(false)
+    }
 
-    res.redirect('/admin/ordered')
+    // res.redirect('/admin/ordered')
 })
 
 router.get("/history",async(req,res)=>{

@@ -33,5 +33,12 @@ const db = new Firestore({
 // batch.update({
 //   'test':200
 // })
+const test = async () =>{
+  await db.doc(`transactions/Dk1TedH6edsaMOcdR83b`).update({
+    components: ['athul','das'],
+    status: 1
+  })
+}
+test()
 
 module.exports = db;

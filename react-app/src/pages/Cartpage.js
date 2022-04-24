@@ -15,12 +15,13 @@ import { useHistory } from "react-router-dom";
 
 
 function Cartpage() {
+  var arr = []
   const navigate = useNavigate();
   
   const [details, setDetails] = useState({
     name: "",
     email: "",
-    roll: "",
+    rollNo: "",
     mobile:"",
 });
 
@@ -39,23 +40,25 @@ const handleChange = (e) => {
 const handleSubmit = async (v) => {
   console.log(st);
     console.log(details);
-   
+   console.log(arr)
     
     await setDoc(doc(db, "userInfo", details.name), {
-        name: details.name,
-        email: details.email,
-        roll: details.roll,
-        mobile:details.mobile,
+        // name: details.name,
+        // email: details.email,
+        // roll: details.roll,
+        // mobile:details.mobile,
+        status:0,
+        user:details,
         start_date:st,
         end_date:end,
-        components:cartItems,
+        cart:arr,
     });
 
     
     setDetails({
         name: "",
         email: "",
-        roll: "",
+        rollNo: "",
         mobile:"",
     });
 
@@ -77,6 +80,14 @@ const handleSubmit = async (v) => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   },[cartItems]);
 
+  // console.log(cartItems[0].name);
+  // console.log(cartItems[1].name);
+
+  cartItems.forEach(item=>{
+    arr.push(item.name);
+  })
+  
+  // console.log(arr)
   const deleteFromCart=(product)=>{
          
     dispatch({type: "DELETE_FROM_CART", payload: product});
@@ -139,7 +150,7 @@ const handleSubmit = async (v) => {
                       <label className="form-label required">roll no</label>
                       <input
                                     type="text"
-                                    value={details.roll}
+                                    value={details.rollNo}
                                     onChange={handleChange}
                                     id="roll"
                                     name="roll" />

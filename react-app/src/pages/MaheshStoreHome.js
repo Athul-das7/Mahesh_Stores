@@ -27,8 +27,8 @@ const inputRef = useRef()
 function getCategory(e) {
   // console.log(e.target.innerText)
   setCategory(e.target.innerText)
+  console.log('test ',category)
   handleclose()
-  // console.log(category)
 }
 function sendValue() {
   navigate('/product',{state:{start:value1,end:value2,category:category}})

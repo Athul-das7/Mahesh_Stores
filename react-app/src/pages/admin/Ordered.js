@@ -44,14 +44,16 @@ function Ordered() {
   // console.log(props.auth);
 
   // if ( props.auth === true ){
-    if ( current.uid === undefined ) {
+  useEffect(()=>{
+    if ( current === undefined || current.uid === undefined ) {
       // console.log('current',current.uid)
       // if (true){
       //  return <Redirect to='/admin'  />
       navigate(`/admin`,{state:{status:1}})
       return( <></> )
     }
-    else{
+  },[current])
+    // else{
     return (
         <AdminLayout>
           <h1 className="title-order">Order List</h1>
@@ -60,7 +62,7 @@ function Ordered() {
           <Rows elements={datas}></Rows>
         </AdminLayout>
     )
-  }
+  // }
   // }
   // else {
   //   return(

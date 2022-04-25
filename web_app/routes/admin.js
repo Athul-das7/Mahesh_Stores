@@ -71,6 +71,7 @@ router.get("/ordered",async(req,res)=>{
     var arr= new Array();
     ordered.forEach(doc=>{
         const data = doc.data()
+        console.log(data.user)
         const obj = {
             id : doc.id,
             cartComponents: data.cartComponents,
@@ -101,6 +102,7 @@ router.get("/returned",async(req,res)=>{
     console.log(returned)
     returned.forEach(doc=>{
         const data = doc.data()
+        console.log(data.user)
         const obj = {
             id : doc.id,
             cartComponents: data.cartComponents,
@@ -108,12 +110,7 @@ router.get("/returned",async(req,res)=>{
             returnDate: data.returnDate,
             startDate: data.startDate,
             status: data.status,
-            user: { 
-                email: data.user.email,
-                name: data.user.name,
-                phone: data.user.phone,
-                rollNo: data.user.rollNo
-            },
+            user: data.user, 
             endDate: data.endDate
         }
         arr.push(obj);
@@ -136,16 +133,18 @@ router.post('/returned', async(req,res)=>{
 
 router.post('/ordered', async(req,res)=>{
     console.log(req.body)
+    console.log(req.body.id)
     try{
         console.log('enetered')
         await db.doc(`transactions/${req.body.id}`).update({
-            components: req.components,
+            components: req.body.components,
             status: 1
         })
         console.log('yes true')
         res.json(true)
     }
-    catch{
+    catch(e){
+        console.error(e)
         console.log('got error')
         res.json(false)
     }

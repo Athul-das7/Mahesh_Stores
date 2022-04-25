@@ -40,6 +40,7 @@ function CollapseComp(props) {
           console.log('data',res.data)
           if ( res.data === true ) {
               // setAuth(true)
+              window.location.reload()
               navigate(`/admin/orders`)
           }
           else{
@@ -82,7 +83,7 @@ function CollapseComp(props) {
                           </>
                         )
                       })}
-                      <Button type="submit" name="button" value={props.tid} >Success</Button>
+                      <Button type="submit" name="button" value={props.tid} >Submit</Button>
                     </form>
         </Collapse>
         {/* <Button >

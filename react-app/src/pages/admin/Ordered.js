@@ -44,15 +44,15 @@ function Ordered() {
   // console.log(props.auth);
 
   // if ( props.auth === true ){
-  useEffect(()=>{
-    if ( current === undefined || current.uid === undefined ) {
-      // console.log('current',current.uid)
-      // if (true){
-      //  return <Redirect to='/admin'  />
-      navigate(`/admin`,{state:{status:1}})
-      return( <></> )
-    }
-  },[current])
+  // useEffect(()=>{
+  //   if ( current === undefined || current.uid === undefined ) {
+  //     // console.log('current',current.uid)
+  //     // if (true){
+  //     //  return <Redirect to='/admin'  />
+  //     navigate(`/admin`,{state:{status:1}})
+  //     return( <></> )
+  //   }
+  // },[current])
     // else{
     return (
         <AdminLayout>

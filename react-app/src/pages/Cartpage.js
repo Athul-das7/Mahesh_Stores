@@ -22,7 +22,7 @@ function Cartpage() {
     name: "",
     email: "",
     rollNo: "",
-    mobile:"",
+    phone:"",
 });
 
 const st = localStorage.getItem('startDate');
@@ -39,10 +39,10 @@ const handleChange = (e) => {
 
 const handleSubmit = async (v) => {
   console.log(st);
-    console.log(details);
+    console.log('details',details);
    console.log(arr)
     
-    await setDoc(doc(db, "userInfo", details.name), {
+    await addDoc(collection(db, "transactions"), {
         // name: details.name,
         // email: details.email,
         // roll: details.roll,
@@ -51,7 +51,7 @@ const handleSubmit = async (v) => {
         user:details,
         start_date:st,
         end_date:end,
-        cart:arr,
+        cartComponents:arr,
     });
 
     
@@ -59,7 +59,7 @@ const handleSubmit = async (v) => {
         name: "",
         email: "",
         rollNo: "",
-        mobile:"",
+        phone:"",
     });
 
 
@@ -168,10 +168,10 @@ const handleSubmit = async (v) => {
                       <label className="form-label required">Mobile Number</label>
                       <input
                                     type="text"
-                                    value={details.mobile}
+                                    value={details.phone}
                                     onChange={handleChange}
-                                    id="mobile"
-                                    name="mobile"/>
+                                    id="phone"
+                                    name="phone"/>
                     </div>
                     
                   </form>

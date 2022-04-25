@@ -34,10 +34,12 @@ const db = new Firestore({
 //   'test':200
 // })
 const test = async () =>{
-  await db.doc(`transactions/Dk1TedH6edsaMOcdR83b`).update({
+  const id = 'Dk1TedH6edsaMOcdR83b'
+  await db.doc(`transactions/${id}`).update({
     components: ['athul','das'],
     status: 1
   })
+  console.log("success")
 }
 test()
 

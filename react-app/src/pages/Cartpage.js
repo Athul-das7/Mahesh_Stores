@@ -7,7 +7,7 @@ import React, { Component }  from 'react';
 import db from '../fireconfig';
 import { collection, query, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
-import { doc, setDoc,addDoc } from "firebase/firestore";
+import { doc, setDoc,addDoc,updateDoc } from "firebase/firestore";
 import {Navigate, useNavigate} from 'react-router-dom'
 import {useLocation} from 'react-router-dom';
 import { useHistory } from "react-router-dom";
@@ -62,12 +62,22 @@ const handleSubmit = async (v) => {
         phone:"",
     });
 
+    
+    cartItems.forEach(item=>{
+         
+      const docRef=doc(db,'products',item.id)
+       updateDoc(docRef, {
+         
+        count: item.count-1
+      });
+    })
 
   localStorage.clear();
   window.alert("Order Placed,confirmation due contact administrator")
   navigate('../')
   
   
+
  };
 
   

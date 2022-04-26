@@ -113,7 +113,7 @@ function Homepage() {
               <div className='row'>
                       <h3 className='main_heading'>Components</h3>
                       <hr />
-                  {products.filter((obj) => obj.name.toLowerCase().includes(searchkey))
+                  {products.filter((obj) => obj.name.toLowerCase().includes(searchkey)).filter((obj)=>obj.count > 0)
                   .filter((obj) => obj.category.toLowerCase().includes(filterType)).map((product) => {
                     
                         return <div className='col-md-4'>

@@ -3,9 +3,9 @@ import { Table, Container } from '@mantine/core';
 import { Button, Collapse } from '@mantine/core';
 import { useState } from 'react';
 // import { Button } from 'react-bootstrap'
-import CollapseComp from './CollapseComp';
+import ReturnCollapse from './ReturnCollapse';
 
-function Rows(props) {
+function ReturnRows(props) {
   const elements = props.elements
   const [cartdata,setCartdata] = useState([]);
   console.log(elements);
@@ -30,12 +30,14 @@ function Rows(props) {
         <Collapse key={element.id} in={opened}>
           depressing
         </Collapse> */}
-        {console.log(element.cartComponents)}
-      <CollapseComp submit={props.submit} cart={element.cartComponents} tid={element.id}/>
+        {console.log(element.id)}
+      <ReturnCollapse submit={props.submit} cart={element.components} tid={element.id}/>
       </td>
-      {/* <td>
-        <Button >Success</Button>
-      </td> */}
+      <td>
+        <form onSubmit={props.submit}>
+         <Button type="submit" name="button" value={element.id} >Success</Button>
+        </form>
+      </td>
     </tr>
   ));
 
@@ -48,7 +50,7 @@ function Rows(props) {
           <th>Name</th>
           <th>Phone Number</th>
           <th>Component Details</th>
-          {/* <th>Submit</th> */}
+          <th>Returned</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -57,4 +59,4 @@ function Rows(props) {
   );
 }
 
-export default Rows
+export default ReturnRows

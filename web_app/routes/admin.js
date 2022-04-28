@@ -4,6 +4,8 @@ const { isRequired } = require('nodemon/lib/utils')
 var router = express.Router()
 const db = require('../firebase')// require('../database')
 const { check, validationResult } = require('express-validator')
+const shell = require('shelljs')
+
 
 var moment = require('moment');
 
@@ -121,13 +123,35 @@ router.get("/returned",async(req,res)=>{
 
 router.post('/returned', async(req,res)=>{
     console.log(req.body.id)
-    db.doc(`transactions/${req.body.id}`).update({
-        returnDate: new Date(),
-        status: 2,
-        // learnt: 3, 
-    })
+    try{
+        await db.doc(`transactions/${req.body.id}`).update({
+            returnDate: new Date(),
+            status: 2,
+            // learnt: 3, 
+        })
+        
+        const cartComp = await db.collection('transactions').doc(req.body.id).get()
+        const cart = cartComp.data().cartComponents
+        cart.forEach(async(item)=>{
+            db.collection('products')
+                .where('name','==',item)
+                .get()
+                .then(pro=>{
+            pro.forEach(i=>{
+                db.doc(`products/${i.id}`).update({
+                    count:i.data().count+1
+                })
+            })
+        })
+        })
 
-    res.json(true )
+        res.redirect('/admin/returned')
+    }
+    catch(e){
+        console.log('got error')
+        res.json(false);
+
+    }
     // res.redirect('/admin/returned')
 })
 
@@ -141,7 +165,7 @@ router.post('/ordered', async(req,res)=>{
             status: 1
         })
         console.log('yes true')
-        res.json(true)
+        res.redirect('/admin/ordered')
     }
     catch(e){
         console.error(e)
@@ -162,6 +186,12 @@ router.get("/history",async(req,res)=>{
     console.log(currentD);
     // console.log(currentD[0])
     res.render("history",{user:req.session.user, currentD:currentD[0]})
+})
+
+router.post('/email',(req,res)=>{
+    shell.exec('python mail1.py');
+    console.log('hello',req.body)
+    res.json(true)
 })
 
 module.exports = router

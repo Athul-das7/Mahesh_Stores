@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import {useEffect} from 'react'
 import axios from 'axios'
 
-function CollapseComp(props) {
+function ReturnCollapse(props) {
   const [opened, setOpen] = useState(false);
   // const itemsRef= useRef([])
   // const compField= useRef([])
@@ -77,13 +77,14 @@ function CollapseComp(props) {
                                 // const getRef = (element) => (compField.current.push(element))
                         return (
                           <>
-                                     {/* <p key={getRef}>{item}</p> */}
-                          <input type="text" name="test" placeholder={item} />
+                            <label>{item}</label>
+                                                               {/* <p key={getRef}>{item}</p> */}
+                          {/* <input type="text" name="test" placeholder={item} /> */}
                           <br/>
                           </>
                         )
                       })}
-                      <Button type="submit" name="button" value={props.tid} >Submit</Button>
+                      {/* <Button type="submit" name="button" value={props.tid} >Submit</Button> */}
                     </form>
         </Collapse>
         {/* <Button >
@@ -93,4 +94,4 @@ function CollapseComp(props) {
   )
 }
 
-export default CollapseComp
+export default ReturnCollapse

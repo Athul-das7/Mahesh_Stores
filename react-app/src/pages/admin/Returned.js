@@ -36,9 +36,13 @@ function Returned() {
     getData()
     console.log(datas);
   },[])
+    const cng = async ()=>{
+        await authentication.changeuser();
+    }
+    cng()
 
   
-  const current = authentication.currentUser
+  // const current = authentication.currentUser
   // console.log('current',current)
   function getData (){
     fetch(`http://localhost:5000/admin/returned`)
@@ -50,13 +54,13 @@ function Returned() {
 
   // if ( props.auth === true ){
   // useEffect(()=>{
-  //   if ( current === undefined || current.uid === undefined ) {
-  //     // console.log('current',current.uid)
-  //     // if (true){
-  //     //  return <Redirect to='/admin'  />
-  //     navigate(`/admin`,{state:{status:1}})
-  //     return( <></> )
-  //   }
+    if ( authentication.currentUser === null ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
   // },[current])
     // else{
 

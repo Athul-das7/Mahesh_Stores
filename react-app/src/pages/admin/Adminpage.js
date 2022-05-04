@@ -13,7 +13,12 @@ function Adminpage() {
     const navigate = useNavigate()
     const location = useLocation()
     const authentication = useAuth()
-if ( authentication.currentUser )     console.log('hey yah', authentication.currentUser.email)
+    const cng = async ()=>{
+        await authentication.changeuser();
+    }
+    cng()
+if ( authentication.currentUser )     
+console.log('hey yah', authentication.currentUser.email)
 
     const [status,setStatus] = useState(()=>{ 
         // if ( props.status === undefined || props.status === -1 )
@@ -35,7 +40,8 @@ if ( authentication.currentUser )     console.log('hey yah', authentication.curr
         console.log(authentication.test)
 
         // authentication.setCurrentUser('this is brokenpipe')
-        console.log(authentication.currentUser)
+        if (authentication.currentUser) console.log(authentication.currentUser.email)
+        else console.log(authentication.currentUser)
     }
     trying()
     const emailField = useRef()

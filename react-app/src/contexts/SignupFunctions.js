@@ -30,15 +30,11 @@ export function Authvalue(){
   }
 
     // function checkUser(user){
-    useEffect(() => {
-      const unsubscribe = auth.onAuthStateChanged(user => {
-        console.log('user',user.uid)
-        setCurrentUser(user)
-        // setLoading(false)
+    function changeuser(){
+      auth.onAuthStateChanged(user=> {
+        setCurrentUser(user);
       })
-      console.log('unsub',unsubscribe.uid)
-      return unsubscribe
-    },[])
+    }
 
-  return {working:'working',test,setTest,currentUser, setCurrentUser,login,logout}
+  return {working:'working',test,setTest,currentUser, setCurrentUser,login,logout,changeuser}
 }

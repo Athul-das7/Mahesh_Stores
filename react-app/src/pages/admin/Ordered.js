@@ -38,7 +38,11 @@ function Ordered() {
   },[])
 
   
-  const current = authentication.currentUser
+    const cng = async ()=>{
+        await authentication.changeuser();
+    }
+    cng()
+  // const current = authentication.currentUser
   // console.log('current',current)
   function getData (){
     fetch(`http://localhost:5000/admin/ordered`)
@@ -50,13 +54,14 @@ function Ordered() {
 
   // if ( props.auth === true ){
   // useEffect(()=>{
-  //   if ( current === undefined || current.uid === undefined ) {
-  //     // console.log('current',current.uid)
-  //     // if (true){
-  //     //  return <Redirect to='/admin'  />
-  //     navigate(`/admin`,{state:{status:1}})
-  //     return( <></> )
-  //   }
+    console.log('auth curr', authentication.currentUser)
+    if ( authentication.currentUser === null ){//&& authentication.currentUser.uid === undefined ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
   // },[current])
     // else{
 

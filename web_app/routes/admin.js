@@ -17,6 +17,11 @@ router.get('/login', async (req,res)=>{
 // login post 
 router.post('/login', async (req,res)=>{
     console.log('changed', req.body)
+    // const test = db.doc('products/water sensor').get()
+    // // console.log(test.data())
+    // test.forEach(t=>{
+    // console.log(t.data())
+    // })
 
 // [ //validator for express 
 //     check('password','this field must atleast be 4 characters')

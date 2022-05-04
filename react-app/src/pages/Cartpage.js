@@ -5,12 +5,19 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import React, { Component }  from 'react';
 import db from '../fireconfig';
+import { auth } from "firebase/app";
+import "firebase/auth";
+import { getAuth, signInWithPhoneNumber } from "firebase/auth";
+
+
+
 import { collection, query, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
 import { doc, setDoc,addDoc,updateDoc } from "firebase/firestore";
 import {Navigate, useNavigate} from 'react-router-dom'
 import {useLocation} from 'react-router-dom';
 import { useHistory } from "react-router-dom";
+import fireDB from '../fireconfig';
 
 
 
@@ -72,9 +79,30 @@ const handleSubmit = async (v) => {
       });
     })
 
-  localStorage.clear();
-  window.alert("Order Placed,confirmation due contact administrator")
-  navigate('../')
+    let recaptcha = new db.auth.RecaptchaVerifier("recaptcha-container");
+    let number = "+916300982989";
+    db
+      .auth()
+      .signInWithPhoneNumber(number, recaptcha)
+      .then((e) => {
+        let code = prompt("enter otp");
+        if (code == null) {
+          return;
+        }
+        e.confirm(code).then((res) => {
+          console.log(res, "................");
+        });
+      })
+      .catch(() => {
+        console.log("error");
+      });
+
+
+localStorage.clear();
+    window.alert("Order Placed,confirmation due contact administrator")
+    navigate('../')
+
+
   
   
 
@@ -182,9 +210,11 @@ const handleSubmit = async (v) => {
                                     onChange={handleChange}
                                     id="phone"
                                     name="phone"/>
+                      
                     </div>
-                    
+                    <div id="recaptcha-container"></div>
                   </form>
+                  
                   <div className='modal-footer'>
                       <button type="submit" onClick={handleSubmit} class="btn-btn-primary">Submit</button>
                       <button type="submit" class="btn-btn-danger">cancel</button>

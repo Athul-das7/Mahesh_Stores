@@ -3,6 +3,7 @@ import img1 from '../img/logo1.jpg';
 import {Link} from 'react-router-dom';
 import{FaBars} from 'react-icons/fa'
 import { useSelector } from 'react-redux';
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 function Header() {
     const{cartItems}=useSelector(state=>state.cartReducer)
   return (

@@ -143,7 +143,7 @@ localStorage.clear();
 
          <tbody>
            
-         <tr>
+         <tr >
             <th>Image</th>
             <th>Name</th>
             <th>action</th>
@@ -154,7 +154,8 @@ localStorage.clear();
           return <tr>
           <td><img src={item.imageURL} height="40" width="40"/></td>
           <td>{item.name}</td>
-          <td><FaBeer size={15} onClick={()=>deleteFromCart(item)}/></td>
+          <td ><FaBeer size={20} onClick={()=>deleteFromCart(item)}/></td>
+         
           </tr>
 
            }
@@ -163,7 +164,7 @@ localStorage.clear();
          </tbody>
           </table>
 
-        <button type="button" className="btn btn-primary" data-bs-target="#mymodal" data-bs-toggle="modal">submit</button>
+        <button type="button" className="b1" data-bs-target="#mymodal" data-bs-toggle="modal">submit</button>
         
         
         <div className="modal" id="mymodal">

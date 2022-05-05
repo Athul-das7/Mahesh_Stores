@@ -91,8 +91,8 @@ function Homepage() {
         <Layout>
             <div className="container">
                 <div className='d-flex justify-content-evenly m-2'>
-                          <div >Starting Date:{start.getDate()}/{start.getMonth()+1}/{start.getFullYear().toString()}</div>
-                          <div >End Date:{end.getDate()}/{end.getMonth()+1}/{end.getFullYear().toString()}</div>
+                          <div id='date'>Starting Date:{start.getDate()}/{start.getMonth()+1}/{start.getFullYear().toString()}</div>
+                          <div id='date'>End Date:{end.getDate()}/{end.getMonth()+1}/{end.getFullYear().toString()}</div>
                 </div>
                 <div className='d-flex w-50 justify-content-evenly'>
                   <input type="text" 
@@ -101,18 +101,21 @@ function Homepage() {
                   className='form-cntrol' placeholder='search Component'/>
                   <select className='form-control' value={filterType}
                   onChange={(e) => {setFilterType(e.target.value)}}>
-                    <option value="">All Categories</option>
-                    <option value="embedded">Embedded</option>
-                    <option value="sensors">Sensors</option>
-                    <option value="general">General</option>
+                    <option className='form-control' value="">All Categories</option>
+                    <option className='form-control' value="embedded">Embedded</option>
+                    <option className='form-control' value="sensors">Sensors</option>
+                    <option className='form-control' value="general">General</option>
                   </select>
                   
                 </div>
 
                 
               <div className='row'>
-                      <h3 className='main_heading'>Components</h3>
-                      <hr />
+
+                    <h3 className='main_heading'>Components</h3>
+                      <hr className='main_heading1'></hr>
+              
+                      
                   {products.filter((obj) => obj.name.toLowerCase().includes(searchkey)).filter((obj)=>obj.count > 0)
                   .filter((obj) => obj.category.toLowerCase().includes(filterType)).map((product) => {
                     
@@ -122,7 +125,7 @@ function Homepage() {
 
                               <div className='product-content'>
                                   <div className='text-center'>
-                                      <p>{product.name}</p>
+                                      <p className='form-control'>{product.name}</p>
                                       <img src={product.imageURL} alt="" className='product-img'/>
                                   </div>
                               </div>

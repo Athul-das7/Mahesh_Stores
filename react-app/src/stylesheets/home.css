@@ -30,8 +30,9 @@ html,body{
     display: block;
     background-image:
     url("../img/homebg.png");
-    background-size: cover;
-    min-height: 500px;
+    background-size:cover;
+
+    min-height: 100vh;
 }
 .big-banner h1{
     text-align: center;

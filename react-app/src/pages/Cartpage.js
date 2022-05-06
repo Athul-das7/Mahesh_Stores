@@ -79,26 +79,8 @@ const handleSubmit = async (v) => {
       });
     })
 
-    let recaptcha = new db.auth.RecaptchaVerifier("recaptcha-container");
-    let number = "+916300982989";
-    db
-      .auth()
-      .signInWithPhoneNumber(number, recaptcha)
-      .then((e) => {
-        let code = prompt("enter otp");
-        if (code == null) {
-          return;
-        }
-        e.confirm(code).then((res) => {
-          console.log(res, "................");
-        });
-      })
-      .catch(() => {
-        console.log("error");
-      });
-
-
-localStorage.clear();
+   
+    localStorage.clear();
     window.alert("Order Placed,confirmation due contact administrator")
     navigate('../')
 

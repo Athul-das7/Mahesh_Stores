@@ -194,7 +194,7 @@ router.get("/history",async(req,res)=>{
 })
 
 router.post('/email',(req,res)=>{
-    shell.exec('python mail1.py');
+    shell.exec(`python mail1.py ${req.body.details.user.name} ${req.body.details.user.email} ${req.body.details.cartComponents}`);
     console.log('hello',req.body)
     res.json(true)
 })

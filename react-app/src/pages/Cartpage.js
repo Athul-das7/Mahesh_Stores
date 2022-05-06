@@ -9,6 +9,7 @@ import { auth } from "firebase/app";
 import "firebase/auth";
 import { getAuth, signInWithPhoneNumber } from "firebase/auth";
 
+import axios from 'axios'
 
 
 import { collection, query, getDocs } from "firebase/firestore";
@@ -48,6 +49,10 @@ const handleSubmit = async (v) => {
   console.log(st);
     console.log('details',details);
    console.log(arr)
+   const det = {
+        user:details,
+        cartComponents:arr,
+   };
     
     await addDoc(collection(db, "transactions"), {
         // name: details.name,
@@ -60,6 +65,20 @@ const handleSubmit = async (v) => {
         end_date:end,
         cartComponents:arr,
     });
+    // changes by athul
+  let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+          }
+      };
+  axios.post('/admin/email',{details:det},axiosConfig)
+      .then(res=>{
+        console.log("hello world")
+      })
+      .catch(err=>{
+          console.log('so many bloody errors')
+      })
 
     
     setDetails({

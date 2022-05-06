@@ -31,13 +31,16 @@ function adminLayout(props) {
                     <Link className="nav-link cus-col" to="/admin/returns">Return list</Link>
                 </li>
                 <li className="nav-item ">
-                    <Link className="nav-link cus-col" to="/admin/additems">Add/remove items</Link>
+                    <Link className="nav-link cus-col" to="/admin/additems">Add items</Link>
                 </li>
                 <li className="nav-item " >
                     <Link className="nav-link cus-col" to="/">Fine List</Link>
                 </li>
                 <li className="nav-item " >
                     <Link className="nav-link cus-col" to="/admin">History</Link>
+                </li>
+                <li className="nav-item " >
+                    <Link className="nav-link cus-col" to="/admin/removeitems">Remove</Link>
                 </li>
                 <li className="nav-item " >
                     {/* <Link className="nav-link cus-col" to="/admin">History</Link> */}

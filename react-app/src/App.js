@@ -10,6 +10,7 @@ import Adminpage from './pages/admin/Adminpage';
 import Ordered from './pages/admin/Ordered';
 import Returned from './pages/admin/Returned';
 import AddItems from './pages/admin/AddItems';
+import RemoveItems from './pages/admin/RemoveItems';
 // import Test from './contexts/Test';
 import './stylesheets/Layout.css'
 import MaheshStoresHome from './pages/MaheshStoreHome';
@@ -42,6 +43,7 @@ function App() {
               <Route path='/admin/orders' exact element={<Ordered/>} />
               <Route path='/admin/returns' exact element={<Returned/>} />
               <Route path='/admin/additems' exact element={<AddItems/>} />
+              <Route path='/admin/removeitems' exact element={<RemoveItems/>} />
               {/* <Route path='/test' exact element={<Test/>} /> */}
               
               

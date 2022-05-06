@@ -143,7 +143,7 @@ localStorage.clear();
 
          <tbody>
            
-         <tr >
+         <tr className='titles'>
             <th>Image</th>
             <th>Name</th>
             <th>action</th>

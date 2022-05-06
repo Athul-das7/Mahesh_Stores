@@ -91,8 +91,8 @@ function Homepage() {
         <Layout>
             <div className="container">
                 <div className='d-flex justify-content-evenly m-2'>
-                          <div id='date'>Starting Date:{start.getDate()}/{start.getMonth()+1}/{start.getFullYear().toString()}</div>
-                          <div id='date'>End Date:{end.getDate()}/{end.getMonth()+1}/{end.getFullYear().toString()}</div>
+                          <div id='date'>Starting Date : {start.getDate()}/{start.getMonth()+1}/{start.getFullYear().toString()}</div>
+                          <div id='date'>End Date : {end.getDate()}/{end.getMonth()+1}/{end.getFullYear().toString()}</div>
                 </div>
                 <div className='d-flex w-50 justify-content-evenly'>
                   <input type="text" 

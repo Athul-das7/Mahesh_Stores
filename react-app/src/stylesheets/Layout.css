@@ -70,15 +70,30 @@ input , select {
     color: black;
     font-weight: bold;
 }
-.form-cntrol,.form-control,.table,.main_heading1,.main_heading{
+.form-cntrol,.form-control,.main_heading1,.main_heading,.modal-title{
     color: black;
     font-weight: bold;
+}
+.table{
+    color: black;
+    font-weight: bold;
+    text-align:center
+}
+.modal-body{
+    color: black;
+    font-weight: bold;
+    padding-left: 2.5em;
 }
 .b1{
     background-color: #ec3a79;
     align-items: center;
     margin-left: 48%;
     border-radius: 15%;
+}
+.titles{
+    color: black;
+    font-weight:900;
+    font-size: 1.32rem;
 }
 
 

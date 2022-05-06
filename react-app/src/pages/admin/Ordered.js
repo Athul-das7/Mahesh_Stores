@@ -74,7 +74,7 @@ function Ordered() {
     // console.log(props.tid)
     for ( let i = 0; i < e.target.test.length; i += 1) {
       components.push(e.target[i].value)
-      e.target[i].value=null
+      // e.target[i].value=null
     }
     const tid = e.target.button.value
     

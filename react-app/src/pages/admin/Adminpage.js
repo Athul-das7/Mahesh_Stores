@@ -69,7 +69,7 @@ console.log('hey yah', authentication.currentUser.email)
                     "Access-Control-Allow-Origin": "*",
                     }
                 };
-            axios.post('http://localhost:5000/admin/login',{uid:authentication.currentUser.uid},axiosConfig)
+            axios.post('/admin/login',{uid:authentication.currentUser.uid},axiosConfig)
                 .then(res=>{
                     // alert('login success')
                     console.log('data',res.data)

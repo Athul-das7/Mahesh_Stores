@@ -45,7 +45,7 @@ function Returned() {
   // const current = authentication.currentUser
   // console.log('current',current)
   function getData (){
-    fetch(`http://localhost:5000/admin/returned`)
+    fetch(`/admin/returned`)
       .then(response => response.json())
       .then(json=>setData(json))
   }
@@ -83,7 +83,7 @@ function Returned() {
           "Access-Control-Allow-Origin": "*",
           }
       };
-  axios.post('http://localhost:5000/admin/returned',{id:tid},axiosConfig)
+  axios.post('/admin/returned',{id:tid},axiosConfig)
       .then(res=>{
           // alert('login success')
           console.log('data',res.data)

@@ -45,7 +45,7 @@ function Ordered() {
   // const current = authentication.currentUser
   // console.log('current',current)
   function getData (){
-    fetch(`http://localhost:5000/admin/ordered`)
+    fetch(`/admin/ordered`)
       .then(response => response.json())
       .then(json=>setData(json))
   }
@@ -84,7 +84,7 @@ function Ordered() {
           "Access-Control-Allow-Origin": "*",
           }
       };
-  axios.post('http://localhost:5000/admin/ordered',{id:tid,components:components},axiosConfig)
+  axios.post('/admin/ordered',{id:tid,components:components},axiosConfig)
       .then(res=>{
           // alert('login success')
           console.log('data',res.data)

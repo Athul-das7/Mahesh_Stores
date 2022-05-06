@@ -37,7 +37,7 @@
   }
   
   .form1 > textarea {
-    height: 150px;
+    height: 100px;
     /* max-width: 400px; */
     min-height: 80px;
   }

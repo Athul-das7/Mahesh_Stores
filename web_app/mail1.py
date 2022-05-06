@@ -17,7 +17,7 @@ print(smtpobj.ehlo())       #this establishes the connection with the server
 print(smtpobj.starttls())   #this start the ttls encryption in the server
 pswd = password.pswd             #Taking the password as input is safer because if you save it in a script anyone who can access the script will be able to find the password
 print(password)
-adminEmail = 'vcestudent@outlook.com'
+adminEmail = 'maheshstores@outlook.com'
 print(smtpobj.login(adminEmail, pswd))  #login in to the smtp server
 
 empStr = ''

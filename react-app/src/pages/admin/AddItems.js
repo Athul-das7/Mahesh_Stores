@@ -5,7 +5,9 @@ import db from '../../fireconfig';
 import { doc, setDoc,addDoc,updateDoc } from "firebase/firestore";
 import { collection, query, getDocs } from "firebase/firestore";
 import { useEffect, useState } from 'react'
+import {Navigate, useNavigate} from 'react-router-dom'
 function AddItems() {
+  const navigate = useNavigate();
   const [details, setDetails] = useState({
     category: "",
     name: "",

@@ -11,6 +11,7 @@ import Ordered from './pages/admin/Ordered';
 import Returned from './pages/admin/Returned';
 import AddItems from './pages/admin/AddItems';
 import RemoveItems from './pages/admin/RemoveItems';
+import Productupdate from './pages/admin/productupdate';
 // import Test from './contexts/Test';
 import './stylesheets/Layout.css'
 import MaheshStoresHome from './pages/MaheshStoreHome';
@@ -38,6 +39,7 @@ function App() {
               <Route path='/login' exact element={<Logininfo />} />
               <Route path='/register' exact element={<Registerpage />} />
               <Route path='/productinfo/:productid' exact element={<Productinfo />} />
+              <Route path='/productupdate/:productid' exact element={<Productupdate />} />
               <Route path='/cart' exact element={<Cartpage />} />
               <Route path='/admin' exact element={<Adminpage/>} />
               <Route path='/admin/orders' exact element={<Ordered/>} />

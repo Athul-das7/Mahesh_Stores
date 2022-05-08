@@ -127,7 +127,7 @@ router.get("/returned",async(req,res)=>{
 })
 
 router.post('/returned', async(req,res)=>{
-    console.log(req.body.id)
+    console.log('request id',req.body.id)
     try{
         await db.doc(`transactions/${req.body.id}`).update({
             returnDate: new Date(),
@@ -194,32 +194,28 @@ router.post('/ordered', async(req,res)=>{
 // })
 
 router.get("/History",async(req,res)=>{
-    const ordered = await db.collection('transactions')
-        .get();
-        // .where('status','==',0)
-    var arr= new Array();
-    ordered.forEach(doc=>{
+    var returned = await db.collection('transactions')
+                        // .where('status','!=', 0)
+                        .get();
+    var arr = new Array();
+    console.log(returned)
+    returned.forEach(doc=>{
         const data = doc.data()
-        console.log(data.user)
+        console.log(data)
         const obj = {
             id : doc.id,
             cartComponents: data.cartComponents,
             components: data.components,
             returnDate: data.returnDate,
-            startDate: data.startDate,
+            startDate: data.start_date,
             status: data.status,
-            endDate: data.endDate,
-            user: { 
-                email: data.user.email,
-                name: data.user.name,
-                phone: data.user.phone,
-                rollNo: data.user.rollNo
-            }
+            user: data.user, 
+            endDate: data.end_date
         }
         arr.push(obj);
     })
-    console.log('arr=>',arr)
-    res.json(arr)
+    console.log( moment().format('DD/MM/YYYY'));
+    res.json(arr);
 })
 
 router.post('/email',(req,res)=>{

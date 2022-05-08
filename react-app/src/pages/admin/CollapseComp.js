@@ -75,11 +75,12 @@ function CollapseComp(props) {
                       {props.cart.map(item=>{
                         return (
                           <>
-                          <input type="text" name="test" placeholder={item} />
+                          <input type="text" name="test" placeholder={item} required />
                           <br/>
                           </>
                         )
                       })}
+                      
                       <Button type="submit" name="button" value={props.tid} >Submit</Button>
                     </form>
         </Collapse>

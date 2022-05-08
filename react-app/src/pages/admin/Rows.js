@@ -30,7 +30,7 @@ function Rows(props) {
 
   return (
     <Container size='xl' className='pad-table'>
-    <Table>
+    <Table highlightOnHover>
       <thead>
         <tr>
           <th>Roll NO.</th>

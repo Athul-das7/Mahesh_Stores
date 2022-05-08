@@ -15,6 +15,7 @@ import Productupdate from './pages/admin/productupdate';
 // import Test from './contexts/Test';
 import './stylesheets/Layout.css'
 import MaheshStoresHome from './pages/MaheshStoreHome';
+import History from './pages/admin/History';
 // import './stylesheets/Layout.css'
 import './stylesheets/products.css'
 import './stylesheets/Admin.css'
@@ -46,6 +47,7 @@ function App() {
               <Route path='/admin/returns' exact element={<Returned/>} />
               <Route path='/admin/additems' exact element={<AddItems/>} />
               <Route path='/admin/removeitems' exact element={<RemoveItems/>} />
+              <Route path='/admin/history' exact element={<History/>} />
               {/* <Route path='/test' exact element={<Test/>} /> */}
               
               

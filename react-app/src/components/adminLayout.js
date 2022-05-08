@@ -37,7 +37,7 @@ function adminLayout(props) {
                     <Link className="nav-link cus-col" to="/">Fine List</Link>
                 </li>
                 <li className="nav-item " >
-                    <Link className="nav-link cus-col" to="/admin">History</Link>
+                    <Link className="nav-link cus-col" to="/admin/history">History</Link>
                 </li>
                 <li className="nav-item " >
                     <Link className="nav-link cus-col" to="/admin/removeitems">Remove</Link>

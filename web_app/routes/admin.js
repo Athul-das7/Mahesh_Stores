@@ -181,16 +181,44 @@ router.post('/ordered', async(req,res)=>{
     // res.redirect('/admin/ordered')
 })
 
-router.get("/history",async(req,res)=>{
-    const sql = `select  Users.rollNo, Users.studentname, Users.contact,startDate, endDate, compList, returnDate, transId
-    from Transactions
-    inner join Users on Transactions.roll_No = Users.rollNo
-    inner join Cart on Cart.cartId = Transactions.cart_Id
-    where compList is not null;`
-    const currentD = await db.promise().query(sql)
-    console.log(currentD);
-    // console.log(currentD[0])
-    res.render("history",{user:req.session.user, currentD:currentD[0]})
+// router.get("/history",async(req,res)=>{
+//     const sql = `select  Users.rollNo, Users.studentname, Users.contact,startDate, endDate, compList, returnDate, transId
+//     from Transactions
+//     inner join Users on Transactions.roll_No = Users.rollNo
+//     inner join Cart on Cart.cartId = Transactions.cart_Id
+//     where compList is not null;`
+//     const currentD = await db.promise().query(sql)
+//     console.log(currentD);
+//     // console.log(currentD[0])
+//     res.render("history",{user:req.session.user, currentD:currentD[0]})
+// })
+
+router.get("/History",async(req,res)=>{
+    const ordered = await db.collection('transactions')
+        .where('status','==',0)
+        .get();
+    var arr= new Array();
+    ordered.forEach(doc=>{
+        const data = doc.data()
+        console.log(data.user)
+        const obj = {
+            id : doc.id,
+            cartComponents: data.cartComponents,
+            components: data.components,
+            returnDate: data.returnDate,
+            startDate: data.startDate,
+            status: data.status,
+            endDate: data.endDate,
+            user: { 
+                email: data.user.email,
+                name: data.user.name,
+                phone: data.user.phone,
+                rollNo: data.user.rollNo
+            }
+        }
+        arr.push(obj);
+    })
+    res.json(arr)
 })
 
 router.post('/email',(req,res)=>{

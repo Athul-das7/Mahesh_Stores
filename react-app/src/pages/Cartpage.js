@@ -218,8 +218,8 @@ const handleSubmit = async (v) => {
                   </form>
                   
                   <div className='modal-footer'>
-                      <button type="submit" onClick={handleSubmit} class="btn-btn-primary">Submit</button>
-                      <button type="submit" class="btn-btn-danger">cancel</button>
+                      <button type="submit" onClick={handleSubmit} className="btn-btn-primary" data-bs-dismiss="modal">Submit</button>
+                      <button type="submit" className="btn-btn-danger" data-bs-dismiss="modal">cancel</button>
                   </div>
               </div>
             </div>

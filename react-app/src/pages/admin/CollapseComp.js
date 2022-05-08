@@ -66,7 +66,6 @@ function CollapseComp(props) {
   return (
     <>
         <Button onClick={() => setOpen((o) => !o)}>
-          {/* Toggle content */}
           {MdOutlineExpandMore()}
         </Button>
 
@@ -74,10 +73,8 @@ function CollapseComp(props) {
 
                     <form onSubmit={props.submit}>
                       {props.cart.map(item=>{
-                                // const getRef = (element) => (compField.current.push(element))
                         return (
                           <>
-                                     {/* <p key={getRef}>{item}</p> */}
                           <input type="text" name="test" placeholder={item} />
                           <br/>
                           </>
@@ -86,9 +83,6 @@ function CollapseComp(props) {
                       <Button type="submit" name="button" value={props.tid} >Submit</Button>
                     </form>
         </Collapse>
-        {/* <Button >
-          {MdOutlineExpandMore}
-        </Button> */}
     </>
   )
 }

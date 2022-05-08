@@ -6,8 +6,25 @@ import { doc, setDoc,addDoc,updateDoc } from "firebase/firestore";
 import { collection, query, getDocs } from "firebase/firestore";
 import { useEffect, useState } from 'react'
 import {Navigate, useNavigate} from 'react-router-dom'
+import {useAuth} from '../../contexts/AuthContext'
+
 function AddItems() {
   const navigate = useNavigate();
+  const authentication = useAuth()
+  const cng = async ()=>{
+      await authentication.changeuser();
+  }
+  cng()
+  useEffect(() => {
+    if ( authentication.currentUser === null ){//&& authentication.currentUser.uid === undefined ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
+  },[authentication.currentUser])
+
   const [details, setDetails] = useState({
     category: "",
     name: "",

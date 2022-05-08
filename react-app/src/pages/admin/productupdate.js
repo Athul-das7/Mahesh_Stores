@@ -8,7 +8,24 @@ import "../../stylesheets/additems.css"
 import db from '../../fireconfig';
 import {setDoc,addDoc,updateDoc,deleteDoc } from "firebase/firestore";
 import { collection, query, getDocs } from "firebase/firestore";
+import {useAuth} from '../../contexts/AuthContext'
+
 function Productupdate() {
+  const authentication = useAuth()
+  const cng = async ()=>{
+      await authentication.changeuser();
+  }
+  cng()
+  useEffect(() => {
+    if ( authentication.currentUser === null ){//&& authentication.currentUser.uid === undefined ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
+  },[authentication.currentUser])
+
     const navigate = useNavigate();
   const [product,setproduct]=useState([])
   const params=useParams();

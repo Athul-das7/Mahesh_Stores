@@ -1,9 +1,19 @@
-import db from '../../fireconfig';
+import React from 'react'
+import { useState } from 'react';
+import AdminLayout from '../../components/adminLayout'
 
-async function test (){
-
-const t = await db.doc('products/water sensor').get()
-console.log(t.data());
+function Test() {
+  const [data, setData] = useState();
+  function getData (){
+    fetch(`/admin/history`)
+      .then(response => response.json())
+      .then(json=>setData(json))
+  }
+  return (
+    <AdminLayout>
+        hello world
+    </AdminLayout>
+  )
 }
 
-test()
+export default Test

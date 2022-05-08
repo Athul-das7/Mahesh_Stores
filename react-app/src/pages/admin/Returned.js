@@ -25,7 +25,21 @@ function Returned() {
   // const [page, setPage] = useState('ordered')
   // console.log(page);
   const [datas,setData] = useState([])
+  // const authentication = useAuth()
   const authentication = useAuth()
+  const cng = async ()=>{
+      await authentication.changeuser();
+  }
+  cng()
+  useEffect(() => {
+    if ( authentication.currentUser === null ){//&& authentication.currentUser.uid === undefined ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
+  },[authentication.currentUser])
   console.log('ordered', authentication.currentUser)
 
   // useEffect(() => {
@@ -36,10 +50,10 @@ function Returned() {
     getData()
     console.log(datas);
   },[])
-    const cng = async ()=>{
-        await authentication.changeuser();
-    }
-    cng()
+    // const cng = async ()=>{
+    //     await authentication.changeuser();
+    // }
+    // cng()
 
   
   // const current = authentication.currentUser
@@ -54,13 +68,13 @@ function Returned() {
 
   // if ( props.auth === true ){
   // useEffect(()=>{
-    if ( authentication.currentUser === null ) {
-      // console.log('current',current.uid)
-      // if (true){
-      //  return <Redirect to='/admin'  />
-      navigate(`/admin`,{state:{status:1}})
-      return( <></> )
-    }
+    // if ( authentication.currentUser === null ) {
+    //   // console.log('current',current.uid)
+    //   // if (true){
+    //   //  return <Redirect to='/admin'  />
+    //   navigate(`/admin`,{state:{status:1}})
+    //   return( <></> )
+    // }
   // },[current])
     // else{
 

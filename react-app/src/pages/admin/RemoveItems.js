@@ -6,9 +6,25 @@ import fireDB from '../../fireconfig';
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import {useLocation} from 'react-router-dom';
+import {useAuth} from '../../contexts/AuthContext'
 
 
 function RemoveItem() {
+  const authentication = useAuth()
+  const cng = async ()=>{
+      await authentication.changeuser();
+  }
+  cng()
+  useEffect(() => {
+    if ( authentication.currentUser === null ){//&& authentication.currentUser.uid === undefined ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
+  },[authentication.currentUser])
+
   const [products,setproducts]=useState([]);
   const navigate=useNavigate();
   const [searchkey , setSearchkey]=useState([]);

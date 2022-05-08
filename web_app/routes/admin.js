@@ -195,8 +195,8 @@ router.post('/ordered', async(req,res)=>{
 
 router.get("/History",async(req,res)=>{
     const ordered = await db.collection('transactions')
-        .where('status','==',0)
         .get();
+        // .where('status','==',0)
     var arr= new Array();
     ordered.forEach(doc=>{
         const data = doc.data()
@@ -218,6 +218,7 @@ router.get("/History",async(req,res)=>{
         }
         arr.push(obj);
     })
+    console.log('arr=>',arr)
     res.json(arr)
 })
 

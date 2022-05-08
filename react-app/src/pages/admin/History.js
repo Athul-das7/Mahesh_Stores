@@ -10,18 +10,18 @@ import axios from 'axios'
 
 function History() {
 
-    const [datas,setData] =useState([])
+    const [datas,setDatas] =useState([])
 
 
     useEffect(() => {
         getData()
-        console.log('data from json',datas);
     },[])
     function getData(){
         fetch(`/admin/History`)
         .then(response => response.json())
-        .then(json => setData(json))
+        .then(json => setDatas(json))
     }
+    console.log('data from json',datas);
     return(
         <AdminLayout>
             <h1 className="title-history">History List</h1>

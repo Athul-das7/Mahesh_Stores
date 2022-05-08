@@ -138,17 +138,17 @@ const handleSubmit = async (v) => {
 
         <table className='table'>
         
-         <thread>
-      
-         </thread>
-
-         <tbody>
-           
-         <tr className='titles'>
+         <thead>
+          <tr className='titles'>
             <th>Image</th>
             <th>Name</th>
             <th>action</th>
           </tr> 
+      
+         </thead>
+
+         <tbody>
+           
           
            {cartItems.map(item=>{
           
@@ -184,7 +184,8 @@ const handleSubmit = async (v) => {
                                     id="name"
                                     value={details.name}
                                     onChange={handleChange}
-                                    name="name" />
+                                    name="name"
+                                    />
                     </div>
                     <div className='mb-3'>
                       <label className="form-label required">roll no</label>
@@ -193,7 +194,8 @@ const handleSubmit = async (v) => {
                                     value={details.rollNo}
                                     onChange={handleChange}
                                     id="rollNo"
-                                    name="rollNo" />
+                                    name="rollNo"
+                                    />
                     </div>
                     <div className='mb-3'>
                       <label className="form-label required">Email</label>
@@ -202,7 +204,8 @@ const handleSubmit = async (v) => {
                                     value={details.email}
                                     onChange={handleChange}
                                     id="email"
-                                    name="email"/>
+                                    name="email"
+                                    />
                     </div>
                     <div className='mb-3'>
                       <label className="form-label required">Mobile Number</label>
@@ -211,16 +214,17 @@ const handleSubmit = async (v) => {
                                     value={details.phone}
                                     onChange={handleChange}
                                     id="phone"
-                                    name="phone"/>
+                                    name="phone"
+                                    />
                       
                     </div>
                     <div id="recaptcha-container"></div>
+                    <div className='modal-footer'>
+                        <button type="submit" onClick={handleSubmit} className="btn-btn-primary" data-bs-dismiss="modal">Submit</button>
+                        <button type="submit" className="btn-btn-danger" data-bs-dismiss="modal">cancel</button>
+                    </div>
                   </form>
                   
-                  <div className='modal-footer'>
-                      <button type="submit" onClick={handleSubmit} className="btn-btn-primary" data-bs-dismiss="modal">Submit</button>
-                      <button type="submit" className="btn-btn-danger" data-bs-dismiss="modal">cancel</button>
-                  </div>
               </div>
             </div>
 

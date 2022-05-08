@@ -18,9 +18,9 @@ import MaheshStoresHome from './pages/MaheshStoreHome';
 import History from './pages/admin/History';
 // import './stylesheets/Layout.css'
 import './stylesheets/products.css'
-import './stylesheets/Admin.css'
 import './stylesheets/home.css'
 import './stylesheets/homemodal.css'
+import './stylesheets/Admin.css'
 import {Provider} from 'react-redux'
 import {AuthProvider} from './contexts/AuthContext'
 

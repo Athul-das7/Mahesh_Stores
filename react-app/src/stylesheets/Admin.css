@@ -51,3 +51,8 @@
 .test{
     min-height: calc(100vh - 1vh);
 }
+
+.modalTest{
+    display: block; 
+    width: 100px;
+}

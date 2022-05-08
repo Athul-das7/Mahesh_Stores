@@ -7,62 +7,16 @@ import Layout from '../../components/Admin'
 import Alert from './Alert'
 import {useAuth} from '../../contexts/AuthContext'
 import axios from 'axios'
-import Ordered from './Ordered'
 
 function Adminpage() {
     const navigate = useNavigate()
     const location = useLocation()
     const authentication = useAuth()
-    const cng = async ()=>{
-        await authentication.changeuser();
-    }
-    cng()
-if ( authentication.currentUser )     
-console.log('hey yah', authentication.currentUser.email)
+    const [btnState, setBtnState] = useState(false)
 
-    const [status,setStatus] = useState(()=>{ 
-        // if ( props.status === undefined || props.status === -1 )
-        if ( location.state === null || location.state.status === null )
-        return -1 
-        else return location.state.status
-    });
-
-    // useEffect(()=>{
-    //     authentication.checkUser(authentication.currentUser)
-    // },[])
-    // console.log('hey yah', authentication.currentUser.uid)
-    // if ( location.state && location.state.status ){
-    //  setStatus(location.state.status)
-    // }
-    // const [auth,setAuth] = useState(false)
-    function trying () {
-        // e.preventDefault()
-        console.log(authentication.test)
-
-        // authentication.setCurrentUser('this is brokenpipe')
-        if (authentication.currentUser) console.log(authentication.currentUser.email)
-        else console.log(authentication.currentUser)
-    }
-    trying()
-    const emailField = useRef()
-    const passwordField = useRef()
-    // var status = props.status;
-    // status = props.status
-    // console.log('props',location.state.id)
-    // console.log(emailField.current.value)
-    // console.log(test)
-
-    async function handleSubmit(e){
-        e.preventDefault();
-        const email = emailField.current.value
-        const password = passwordField.current.value
+    useEffect(() => {
         try{
-            await authentication.login(email, password)
-            // const user = await authentication.login(email, password)
-            // await authentication.checkUser()
-            // console.log('wow',authentication.currentUser.uid)
-            // const a = await authentication.check()
-            console.log("wonderful",authentication.currentUser.uid)
+            console.log('first');
             let axiosConfig = {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
@@ -71,14 +25,14 @@ console.log('hey yah', authentication.currentUser.email)
                 };
             axios.post('/admin/login',{uid:authentication.currentUser.uid},axiosConfig)
                 .then(res=>{
+                    emailField.current.value = null
+                    passwordField.current.value = null
                     // alert('login success')
                     console.log('data',res.data)
                     if ( res.data === true ) {
-                        // setAuth(true)
                         navigate(`/admin/orders`)
                     }
                     else{
-                        // navigate(`/admin`,{status:0})
                         setStatus(0);
                     }
 
@@ -87,13 +41,40 @@ console.log('hey yah', authentication.currentUser.email)
                     console.log('so many bloody errors')
                 })
         }
-        catch{
+        catch(e){
+            console.log(e);
+            setStatus(0);
+        }
+
+    },[authentication.currentUser])
+
+
+    const [status,setStatus] = useState(()=>{ 
+        if ( location.state === null || location.state.status === null )
+            return -1 
+        else return location.state.status
+    });
+
+    const emailField = useRef()
+    const passwordField = useRef()
+
+    function handleSubmit(e){
+        setBtnState(true)
+        e.preventDefault();
+        const email = emailField.current.value
+        const password = passwordField.current.value
+        try{
+            authentication.login(email, password)
+        }
+        catch(e){
+            console.log(e);
             setStatus(0);
         }
     
-        emailField.current.value = null
-        passwordField.current.value = null
+        // for( var i = 0; i < 900000000000000000000; i ++);
+        setBtnState(false)
     }
+    
     return (
     <Layout>
     <div className="container-fluid bg">
@@ -112,7 +93,7 @@ console.log('hey yah', authentication.currentUser.email)
                         <input ref={passwordField} type="password" className="form-control" placeholder="Password" name="password"/>
                     </div>
                     <div className="mb-3 form-check pad2">
-                        <button type="submit" className="btn btn-success btn-block pad">Submit</button>
+                        <button disabled={btnState} type="submit" className="btn btn-success btn-block pad">Submit</button>
                     </div>
                 </form> 
             </div>

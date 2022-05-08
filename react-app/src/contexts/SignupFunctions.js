@@ -35,6 +35,11 @@ export function Authvalue(){
         setCurrentUser(user);
       })
     }
+    useEffect(() => {
+      auth.onAuthStateChanged(user=> {
+        setCurrentUser(user);
+      })
+    },[currentUser])
 
   return {working:'working',test,setTest,currentUser, setCurrentUser,login,logout,changeuser}
 }

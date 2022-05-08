@@ -26,6 +26,20 @@ function Ordered() {
   // console.log(page);
   const [datas,setData] = useState([])
   const authentication = useAuth()
+  const cng = async ()=>{
+      await authentication.changeuser();
+  }
+  cng()
+  useEffect(() => {
+    if ( authentication.currentUser === null ){//&& authentication.currentUser.uid === undefined ) {
+      // console.log('current',current.uid)
+      // if (true){
+      //  return <Redirect to='/admin'  />
+      navigate(`/admin`,{state:{status:1}})
+      return( <></> )
+    }
+  },[authentication.currentUser])
+
   console.log('ordered', authentication.currentUser)
 
   // useEffect(() => {
@@ -38,10 +52,6 @@ function Ordered() {
   },[])
 
   
-    const cng = async ()=>{
-        await authentication.changeuser();
-    }
-    cng()
   // const current = authentication.currentUser
   // console.log('current',current)
   function getData (){
@@ -55,13 +65,6 @@ function Ordered() {
   // if ( props.auth === true ){
   // useEffect(()=>{
     console.log('auth curr', authentication.currentUser)
-    if ( authentication.currentUser === null ){//&& authentication.currentUser.uid === undefined ) {
-      // console.log('current',current.uid)
-      // if (true){
-      //  return <Redirect to='/admin'  />
-      navigate(`/admin`,{state:{status:1}})
-      return( <></> )
-    }
   // },[current])
     // else{
 
@@ -70,11 +73,16 @@ function Ordered() {
       // console.log('hello',e.target[0].value)
     e.preventDefault();
     let components=[]
-    console.log(e.target.test.length)
+    console.log('length',e.target.test.length)
     // console.log(props.tid)
-    for ( let i = 0; i < e.target.test.length; i += 1) {
-      components.push(e.target[i].value)
-      // e.target[i].value=null
+    if ( e.target.test.length ===  undefined ) {
+      components.push(e.target.test.value)
+    }
+    else {
+      for ( let i = 0; i < e.target.test.length; i += 1) {
+        components.push(e.target[i].value)
+        // e.target[i].value=null
+      }
     }
     const tid = e.target.button.value
     

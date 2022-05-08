@@ -35,7 +35,7 @@ function ReturnRows(props) {
       </td>
       <td>
         <form onSubmit={props.submit}>
-         <Button type="submit" name="button" value={element.id} >Success</Button>
+         <Button type="submit" name="button" value={element.id} >Submit</Button>
         </form>
       </td>
     </tr>

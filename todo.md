@@ -12,11 +12,9 @@ Adding default route for wrong access
 
 Setting helmet for express server 
 
-OTP verification for order
+~~The authentication takes twice to get authenticated~~
 
-The authentication takes twice to get authenticated
-
-The credentials are not correctly being reflected
+~~The credentials are not correctly being reflected~~
 
 For every 24 hours signout all the devices
 
@@ -29,3 +27,5 @@ Python scripts for notifications
 Securing the network from ddos attacks
 
 Adding default route for wrong access
+
+We are able to go back to cart page after submit ( could create -ve value error )

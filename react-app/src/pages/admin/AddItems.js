@@ -65,7 +65,7 @@ function AddItems() {
   }
   return (
     <AdminLayout>
-    <form className='form1'>
+    <form className='form1' onSubmit={handleSubmit}>
       <h1>Add Here</h1>
       <label>Category</label>
       <input placeholder='Category'
@@ -74,6 +74,7 @@ function AddItems() {
       value={details.category}
       onChange={handleChange}
       name="category"
+      required
       />
       
 
@@ -85,6 +86,7 @@ function AddItems() {
       value={details.name}
       onChange={handleChange}
       name="name"
+      required
       // onchange={(e) =>setName(e.target.value)}
       />
 
@@ -94,7 +96,8 @@ function AddItems() {
       id="count"
       value={details.count}
       onChange={handleChange}
-      name="count"/>
+      name="count"
+      required/>
 
       <label>description</label>
       <textarea placeholder='component Description'
@@ -102,7 +105,8 @@ function AddItems() {
       id="description"
       value={details.description}
       onChange={handleChange}
-      name="description"/>
+      name="description"
+      required/>
 
       <label>Image URL</label>
       <textarea placeholder='Image URL'
@@ -110,9 +114,10 @@ function AddItems() {
       id="imageURL"
       value={details.imageURL}
       onChange={handleChange}
-      name="imageURL"/>
+      name="imageURL"
+      required/>
 
-      <button type="submit" onClick={handleSubmit}>ADD TO DB</button>
+      <button type="submit" >ADD TO DB</button>
     </form>
 
     </AdminLayout>

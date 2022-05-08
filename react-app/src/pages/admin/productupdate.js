@@ -39,6 +39,7 @@ function Productupdate() {
         const productTemp=await getDoc(doc(fireDB,"products",params.productid));
         
         setproduct(productTemp.data());
+        setDetails(productTemp.data()); // athul change
         //console.log(productsArray)
         }catch(error){
         console.log(error)
@@ -95,6 +96,7 @@ function Productupdate() {
       });
       navigate("../")
     }
+    console.log(product);
   return (
     <AdminLayout>
         {/* <h1 className='product-name'>Component Description</h1> */}
@@ -114,6 +116,7 @@ function Productupdate() {
       <h1>update data</h1>
       <label>Category</label>
       <input placeholder='Category'
+      className='form-control'
       type="text"
       id="category"
       value={details.category}

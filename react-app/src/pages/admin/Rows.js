@@ -23,32 +23,20 @@ function Rows(props) {
       <td>{element.user.name}</td>
       <td>{element.user.phone}</td>
       <td>
-        {/* <Button onClick={() => setOpen((o) => !o)}>
-          Toggle content
-        </Button>
-
-        <Collapse key={element.id} in={opened}>
-          depressing
-        </Collapse> */}
-        {console.log(element.cartComponents)}
       <CollapseComp submit={props.submit} cart={element.cartComponents} tid={element.id}/>
       </td>
-      {/* <td>
-        <Button >Success</Button>
-      </td> */}
     </tr>
   ));
 
   return (
     <Container size='xl' className='pad-table'>
-    <Table>
+    <Table highlightOnHover>
       <thead>
         <tr>
           <th>Roll NO.</th>
           <th>Name</th>
           <th>Phone Number</th>
           <th>Component Details</th>
-          {/* <th>Submit</th> */}
         </tr>
       </thead>
       <tbody>{rows}</tbody>

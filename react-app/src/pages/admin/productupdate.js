@@ -39,6 +39,7 @@ function Productupdate() {
         const productTemp=await getDoc(doc(fireDB,"products",params.productid));
         
         setproduct(productTemp.data());
+        setDetails(productTemp.data()); // athul change
         //console.log(productsArray)
         }catch(error){
         console.log(error)
@@ -114,10 +115,10 @@ function Productupdate() {
         <form className='form1'>
       <h1>update data</h1>
       <label>Category</label>
-      <textarea placeholder='Category'
+      <input placeholder='Category'
+      className='form-control'
       type="text"
       id="category"
-      defaultValue={product.category}
       value={details.category}
       onChange={handleChange}
       name="category"
@@ -126,22 +127,20 @@ function Productupdate() {
 
       <label>Name</label>
       
-      <textarea placeholder='Component Name'
+      <input placeholder='Component Name'
       type="text"
       id="name"
       value={details.name}
-      defaultValue={product.name}
       onChange={handleChange}
       name="name"
       // onchange={(e) =>setName(e.target.value)}
       />
 
       <label>Count</label>
-      <textarea placeholder='Components Count'
+      <input placeholder='Components Count'
       type="text"
       id="count"
       value={details.count}
-      defaultValue={product.count}
       onChange={handleChange}
       name="count"/>
 
@@ -150,7 +149,6 @@ function Productupdate() {
       type="text"
       id="description"
       value={details.description}
-      defaultValue={product.description}
       onChange={handleChange}
       name="description"/>
 
@@ -159,7 +157,6 @@ function Productupdate() {
       type="text"
       id="imageURL"
       value={details.imageURL}
-      defaultValue={product.imageURL}
       onChange={handleChange}
       name="imageURL"/>
 

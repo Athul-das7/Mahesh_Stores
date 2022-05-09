@@ -35,12 +35,17 @@ function HomeLayout(props) {
                         </li>  
                     </ul>
                     <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <Link className="nav-link" to="/payments">Payments</Link>
+                        </li>
                         <li class="nav-item">
+                        
                         <Link className="nav-link" to="/admin">Admin</Link>
                             {/* <a class="nav-link" href="/admin">
                                 <span class="glyphicon glyphicon-log-in">Admin</span>
                             </a> */}
                         </li>
+                        
                     </ul>
                 </div>
             </div>        

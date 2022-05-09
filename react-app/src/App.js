@@ -23,7 +23,9 @@ import './stylesheets/homemodal.css'
 import './stylesheets/Admin.css'
 import {Provider} from 'react-redux'
 import {AuthProvider} from './contexts/AuthContext'
-
+import Payments from './pages/Payments';
+import FinalPayment from './pages/FinalPayment';
+import Gateway from './pages/Gateway'
 
 function App() {
   
@@ -47,9 +49,15 @@ function App() {
               <Route path='/admin/returns' exact element={<Returned/>} />
               <Route path='/admin/additems' exact element={<AddItems/>} />
               <Route path='/admin/removeitems' exact element={<RemoveItems/>} />
+<<<<<<< Updated upstream
               <Route path='/admin/history' exact element={<History/>} />
               {/* <Route path='/test' exact element={<Test/>} /> */}
               
+=======
+              <Route path='/payments' exact element ={<Payments/>} />
+               <Route path='/FinalPayment/:rollNo' exact element={<FinalPayment />} />     {/* <Route path='/test' exact element={<Test/>} /> */}
+               <Route path='/gateway' exact element ={<Gateway/>} />
+>>>>>>> Stashed changes
               
               
               

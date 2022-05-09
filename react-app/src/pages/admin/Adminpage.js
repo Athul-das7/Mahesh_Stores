@@ -43,17 +43,18 @@ function Adminpage() {
         }
         catch(e){
             console.log(e);
-            setStatus(0);
+            // setStatus(0);
         }
 
     },[authentication.currentUser])
 
 
-    const [status,setStatus] = useState(()=>{ 
-        if ( location.state === null || location.state.status === null )
-            return -1 
-        else return location.state.status
-    });
+    const [status,setStatus] = useState(authentication.status)
+    //     ()=>{ 
+    //     if ( location.state === null || location.state.status === null )
+    //         return -1 
+    //     else return location.state.status
+    // });
 
     const emailField = useRef()
     const passwordField = useRef()

@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminLayout from '../../components/adminLayout'
+import AdminLayout from '../../components/AdminLayout'
 import "../../stylesheets/additems.css"
 import db from '../../fireconfig';
 import { doc, setDoc,addDoc,updateDoc } from "firebase/firestore";

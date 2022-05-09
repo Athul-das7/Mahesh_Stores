@@ -2,7 +2,7 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
-import AdminLayout from '../../components/adminLayout'
+import AdminLayout from '../../components/AdminLayout'
 import Rows from './Rows'
 import {useAuth} from '../../contexts/AuthContext'
 import { FaLevelDownAlt } from 'react-icons/fa'
@@ -35,7 +35,9 @@ function Ordered() {
       // console.log('current',current.uid)
       // if (true){
       //  return <Redirect to='/admin'  />
-      navigate(`/admin`,{state:{status:1}})
+      if ( authentication.status === 1 ) authentication.setStatus(1);
+      else authentication.setStatus(2)
+      navigate(`/admin`)
       return( <></> )
     }
   },[authentication.currentUser])

@@ -19,6 +19,7 @@ import {auth} from '../fireconfig'
 export function Authvalue(){
   const [currentUser, setCurrentUser] = useState()
   const [test,setTest] = useState('hello test')
+  const [status,setStatus] = useState(-1)
 
   function login(email,password) {
     console.log(email,password)
@@ -41,5 +42,5 @@ export function Authvalue(){
       })
     },[currentUser])
 
-  return {working:'working',test,setTest,currentUser, setCurrentUser,login,logout,changeuser}
+  return {working:'working',status,setStatus,currentUser, setCurrentUser,login,logout,changeuser}
 }

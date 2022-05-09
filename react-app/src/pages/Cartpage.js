@@ -144,7 +144,6 @@ const handleSubmit = async (v) => {
             <th>Name</th>
             <th>action</th>
           </tr> 
-      
          </thead>
 
          <tbody>
@@ -185,7 +184,7 @@ const handleSubmit = async (v) => {
                                     value={details.name}
                                     onChange={handleChange}
                                     name="name"
-                                    />
+                                    required />
                     </div>
                     <div className='mb-3'>
                       <label className="form-label required">roll no</label>
@@ -195,7 +194,7 @@ const handleSubmit = async (v) => {
                                     onChange={handleChange}
                                     id="rollNo"
                                     name="rollNo"
-                                    />
+                                    required />
                     </div>
                     <div className='mb-3'>
                       <label className="form-label required">Email</label>
@@ -205,7 +204,7 @@ const handleSubmit = async (v) => {
                                     onChange={handleChange}
                                     id="email"
                                     name="email"
-                                    />
+                                    required/>
                     </div>
                     <div className='mb-3'>
                       <label className="form-label required">Mobile Number</label>
@@ -215,16 +214,16 @@ const handleSubmit = async (v) => {
                                     onChange={handleChange}
                                     id="phone"
                                     name="phone"
-                                    />
+                                    required/>
                       
                     </div>
                     <div id="recaptcha-container"></div>
-                    <div className='modal-footer'>
-                        <button type="submit" onClick={handleSubmit} className="btn-btn-primary" data-bs-dismiss="modal">Submit</button>
-                        <button type="submit" className="btn-btn-danger" data-bs-dismiss="modal">cancel</button>
-                    </div>
                   </form>
                   
+                  <div className='modal-footer'>
+                      <button type="submit" onClick={handleSubmit} className="btn-btn-primary" data-bs-dismiss="modal">Submit</button>
+                      <button type="submit" className="btn-btn-danger" data-bs-dismiss="modal">cancel</button>
+                  </div>
               </div>
             </div>
 

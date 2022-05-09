@@ -18,6 +18,8 @@ Setting helmet for express server
 
 For every 24 hours signout all the devices
 
+Set global login/logout status
+
 ## General:
 
 Creating logs and statistics for the websits 

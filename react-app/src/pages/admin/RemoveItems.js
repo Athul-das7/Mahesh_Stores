@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminLayout from '../../components/adminLayout'
+import AdminLayout from '../../components/AdminLayout'
 import { useEffect, useState } from 'react'
 import { collection, addDoc, getDocs } from "firebase/firestore"; 
 import fireDB from '../../fireconfig';
@@ -20,7 +20,9 @@ function RemoveItem() {
       // console.log('current',current.uid)
       // if (true){
       //  return <Redirect to='/admin'  />
-      navigate(`/admin`,{state:{status:1}})
+      if ( authentication.status === 1 ) authentication.setStatus(1);
+      else authentication.setStatus(2)
+      navigate(`/admin`)
       return( <></> )
     }
   },[authentication.currentUser])

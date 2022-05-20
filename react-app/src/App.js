@@ -49,6 +49,9 @@ function App() {
               <Route path='/admin/returns' exact element={<Returned/>} />
               <Route path='/admin/additems' exact element={<AddItems/>} />
               <Route path='/admin/removeitems' exact element={<RemoveItems/>} />
+              <Route path='/admin/history' exact element={<History/>} />
+              <Route path='/payments' exact element={<FinalPayment />} />
+              <Route path='/gateway' exact element={<Gateway/>} />
 
               
               

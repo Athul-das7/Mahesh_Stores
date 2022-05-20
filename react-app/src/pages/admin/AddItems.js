@@ -20,7 +20,7 @@ function AddItems() {
       // console.log('current',current.uid)
       // if (true){
       //  return <Redirect to='/admin'  />
-      navigate(`/admin`,{state:{status:1}})
+      navigate(`/`,{state:{status:1}})
       return( <></> )
     }
   },[authentication.currentUser])

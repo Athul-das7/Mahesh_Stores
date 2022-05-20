@@ -22,7 +22,7 @@ function RemoveItem() {
       //  return <Redirect to='/admin'  />
       if ( authentication.status === 1 ) authentication.setStatus(1);
       else authentication.setStatus(2)
-      navigate(`/admin`)
+      navigate(`/`)
       return( <></> )
     }
   },[authentication.currentUser])

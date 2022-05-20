@@ -1,11 +1,6 @@
 import React from 'react'
-<<<<<<< Updated upstream
 import AdminLayout from '../../components/AdminLayout'
 import {getDoc,doc } from "firebase/firestore"; 
-=======
-import AdminLayout from '../../components/adminLayout'
-import {getDoc,doc } from "firebase/firestore";  
->>>>>>> Stashed changes
 import fireDB from '../../fireconfig';
 import  { useEffect, useState } from 'react'
 import { Navigate, useParams,useNavigate } from 'react-router-dom';

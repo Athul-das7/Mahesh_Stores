@@ -24,7 +24,7 @@ function Gateway() {
         }
 
   return (
-    <div>
+    <div className="gateway">
         <div class="container1">
         <form action="">
 

@@ -4,7 +4,7 @@
 }
 
 .bg{
-    background: url('../img/gojo.png') no-repeat;
+    background: url('../img/gojo2.jpg') no-repeat;
     background-size: cover;
     width: 100%;
     height: 100vh;
@@ -55,4 +55,8 @@
 .modalTest{
     display: block; 
     width: 100px;
+}
+
+.title-history{
+    text-align: center;
 }

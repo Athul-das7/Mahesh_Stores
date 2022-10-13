@@ -8,7 +8,6 @@ import {auth} from '../fireconfig'
 import { signOut } from 'firebase/auth';
 import {AuthProvider} from '../contexts/AuthContext'
 
-
 function AdminLayout(props) {
     const authentication = useAuth()
     function handleLogout(){

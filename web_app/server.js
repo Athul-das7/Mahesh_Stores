@@ -52,7 +52,7 @@ app.use(session({
 
 app.use('/admin', admin);
 
-app.use('/', home);
+// app.use('/', home);
 
 // app.get('/',(req,res)=>{
 //     console.log('working')
